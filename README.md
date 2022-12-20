@@ -1,2 +1,14 @@
-# cointegrator-searcher
-🐊🤖 𝗰𝗼𝗶𝗻𝘁𝗲𝗴𝗿𝗮𝘁𝗶𝗼𝗻 𝘁𝗿𝗮𝗱𝗶𝗻𝗴 𝗯𝗼𝘁 𝗶𝗻 𝗿𝘂𝘀𝘁
+# 🐊🤖 COINGATOR: Statistical Arbitrage Seacher
+
+<br>
+
+**This program implements a rust seacher running statistical arbitrage strategies.**
+
+For more details about this solver, check my Mirror post, [bot #2: coingator, a rusty statistical arb searcher]().
+
+
+<br>
+
+---
+
+## Current Strategies
