@@ -1,4 +1,4 @@
-# 🐊🤖 COINGATOR: Statistical Arbitrage Seacher
+# 🐊🤖 COINGATOR: a rusty statistical arb seacher
 
 <br>
 
