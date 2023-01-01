@@ -1,14 +1,21 @@
-# 🐊🤖 COINGATOR: Statistical Arbitrage Seacher
+# 🐊🤖 COINGATOR: a rusty statistical arb seacher 👾✨
 
 <br>
 
-**This program implements a rust seacher running statistical arbitrage strategies.**
+* **this program implements a rust seacher running statistical arbitrage strategies.**
 
-For more details about this solver, check my Mirror post, [bot #2: coingator, a rusty statistical arb searcher]().
+* or more details about this solver, check my Mirror post, **[bot #2: coingator, a rusty statistical arb searcher]()**.
 
 
 <br>
 
 ---
 
-## Current Strategies
+## current strategies
+
+
+<br>
+
+---
+
+## installing
