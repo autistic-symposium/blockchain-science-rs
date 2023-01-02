@@ -1,0 +1,17 @@
+[package]
+name = "coingator"
+version = "0.1.0"
+edition = "2021"
+author = ["steinkirch"]
+
+[lib]
+path = "src/lib.rs"
+
+
+[dependencies]
+ethers = { git = "https://github.com/gakonst/ethers-rs", features = ["ws", "rustls", "abigen"] }
+dotenv = "0.15.0"
+tokio = { version = "1.5", features = ["macros", "rt-multi-thread"] }
+reqwest = "0.11.10"
+web3 = "0.18.0"
+rust-bybit = { git = "https://github.com/yufuquant/rust-bybit.git" }
