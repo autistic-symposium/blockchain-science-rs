@@ -6,7 +6,7 @@ use coingator::run;
 #[tokio::main]
 async fn main() {
 
-    dotenv::dotenv().ok();
+    dotenv::dotenv().expect("failed to read .env file");
     run().await;
     
 }

@@ -1,14 +1,15 @@
 // lib.rs - author: steinkirch
 
-mod buybit;
+use std::env;
+
+mod bybit;
 
 
 pub async fn run() {
     
     println!("\n🏭 welcome to cointbot 🪙. type your option:\n");
-    println!("➡ subscribe: subscribe to a topic");
-    println!("➡ coin: get data for a currency");
-    println!("➡ history: get price history for currency and time period\n");
+    println!("➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)");
+    println!("➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)\n");
 
     // create an argument input
     let mut input = String::new();
@@ -22,13 +23,24 @@ pub async fn run() {
     // get the command
     let command = args.next().unwrap();
 
-    // match the command
-    match command {
-        "subscribe" => buybit::subscribe().await,
-        "topics" => buybit::coin().await,
-        "history" => buybit::history().await,
-        _ => println!("command not found: {}", command),
-    }
+    // select which cex to use
+    let cex = &env::var("CEX").expect("⛔️ CEX must be set on .env file");
     
+    if cex == "bybit" {
+        match command {
+            "coin" => bybit::subscribe_coin().await,
+            "pairs" => bybit::subscribe_pairs().await,
+            _ => println!("command not found: {}", command),
+        }
+    
+    } else if cex == "binance" {
+        println!("⛔️ {} is not supported yet", cex);
+    
+    } else if cex == "bitmex" {
+        println!("⛔️ {} is not supported yet", cex);
+
+    } else {
+        println!("⛔️ {} is not a valid CEX", cex);
+    }
 }
 
