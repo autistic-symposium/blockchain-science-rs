@@ -229,7 +229,7 @@ This will open a websocket with bybit and subscribe to the following topics:
 
 <br>
 
-> In the **spot market**, one canbuy and sell cryptocurrencies for **immediate delivery**. They are directly transferred between market participants (buyers and sellers), which have **direct ownership of the assets** and are entitled to **economic benefits**, such as voting for major forks or staking participation.
+> In the **spot market**, one can buy and sell cryptocurrencies for **immediate delivery**. They are directly transferred between market participants (buyers and sellers), which have **direct ownership of the assets** and are entitled to **economic benefits**, such as voting for major forks or staking participation.
 
 <br>
 
@@ -357,7 +357,7 @@ This will open a websocket with bybit and subscribe to private positions on the 
 
 <br>
 
-> BitMEX offers futures and perpetual contracts and allows trading with a high amount of leverage. It also offers perpetual swaps and future contracts that have an inverse (Quanto payout).
+> BitMEX offers futures and perpetual contracts and allows trading with a high leverage. It also offers perpetual swaps and future contracts with an inverse (Quanto payout).
 
 
 <br>
@@ -369,7 +369,7 @@ This will open a websocket with bybit and subscribe to private positions on the 
 
 <br>
 
-> BitMEX offers futures and perpetual contracts and allows trading with a high amount of leverage. It also offers perpetual swaps and future contracts that have an inverse (Quanto payout).
+> 
 
 
 <br>
