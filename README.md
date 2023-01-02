@@ -2,9 +2,9 @@
 
 <br>
 
-**This program implements an arb seacher running statistical arbitrage strategies, such as cointegration**
+**This program implements an arb seacher running statistical arbitrage strategies to several exchanges.**
 
-For more details about this searcher on my Mirror post, **[bot #2: coingator, a rusty statistical arb searcher]()**.
+For more details about this project, check my Mirror post, **[bot #2: coingator, a rusty statistical arb searcher]()**.
 
 
 <br>
@@ -13,55 +13,51 @@ For more details about this searcher on my Mirror post, **[bot #2: coingator, a 
 
 ## strategies
 
-> One of the most well-known strategies among different algorithmic trading methods is
-the statistical arbitrage strategy: a profitable situation stemming from pricing inefficiencies among financial markets. Statistical arbitrage is not a real arbitrage opportunity, but it is merely possible to obtain profit applying past statistics.
+> One of the most well-known strategies among different **algorithmic trading methods** is
+the **statistical arbitrage strategy**: a profitable situation stemming from **pricing inefficiencies among financial markets**. Statistical arbitrage is a merely strategy to obtain profit applying **past statistics**.
 
 <br>
 
 #### cointegration
 
-* [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the test correlation between two or more non-stationary time series for a specified period (identifying long run parameters and determining when stationary time series do not depart from equilibrium).
-* this strategy consists of the following steps:
+* [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long run parameters and determining when stationary time series do not depart from equilibrium).
+* in this packages, we implement this strategy with the following steps:
 
 ```
-    1. get the list of tradeable symbols
-    2. construct and save price history
-    3. find cointegrated pairs
-    4. find trends
+    1. retrieve a list of tradeable symbols
+    2. generate price history
+    3. identify cointegrated pairs
+    4. identify trends
     5. backtest
 ```
 
 <br>
 
-#### monitoring
 
-The following can be monitored through websockets:
-
-* spot local orderbook, depth, k-lines, trades, and private execution reports
-* inverse private positions, executions, orders, stop orders
-* inverse public orderbooks, trades, insurances, perpertuals, futures, k-lines, liquidations
+---
+## monitoring
 
 
-<br>
+#### with [bybit](https://www.bybit.com/en-US/)
 
-#### supported features
+* using this code, we use websockets an bybit's API to monitor the following:
 
-##### cexes
-
-* [bybit](https://www.bybit.com/en-US/)
-
-##### dexes
+```
+    * spot local orderbook, depth, k-lines, trades, and private execution reports
+    * inverse public orderbooks, trades, insurances, perpertuals, futures, k-lines, liquidations
+    * inverse private positions, executions, orders, stop orders
+```
 
 
 <br>
 
 ---
 
-## setting up
+## running
 
-Make sure you have [rust](https://www.rust-lang.org/tools/install) installed.
+#### local set up
 
-Add `.env` info:
+Make sure you have [rust](https://www.rust-lang.org/tools/install) installed and add info to a `.env` file:
 
 ```
 cp .env.example .env
@@ -69,7 +65,7 @@ vim .env
 ```
 
 
-Install with:
+Then install **COINGATOR** with:
 
 ```
 make build
@@ -87,19 +83,27 @@ make run
 
 ---
 
-## running with bybit
+#### running with bybit
+
 
 <br>
 
-#### subscribing for topics for a coin
+
+* [bybit REST endpoints](https://bybit-exchange.github.io/docs/spot/v1/#t-authentication):
+    - Testnet: https://api-testnet.bybit.com 
+    - Mainnet: https://api.bybit.com, https://api.bytick.com 
+
+<br>
+
+##### subscribing for topics for a coin
 
 
-Select `coin`:
+Select `1`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)
+➡ 1: sub to public topics for a derivative (eg. ETHUSDT)
 ```
 
 <br>
@@ -107,9 +111,9 @@ Select `coin`:
 This will open a websocket with bybit and subscribe the `coin` to the following topics:
 
 ```
-- depth
-- trade
-- book ticker
+- depths
+- trades
+- book tickers
 - realtimes
 ```
 
@@ -131,14 +135,16 @@ Example output:
 
 <br>
 
-#### subscribing for topics for a pair
+---
 
-Select `pairs`:
+##### subscribing for topics for a pair
+
+Select `2`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)
+➡ 2: sub to public topics for a pair of derivatives
 ```
 
 
@@ -147,11 +153,10 @@ Select `pairs`:
 This will open a websocket with bybit and subscribe the `pairs` to the following topics:
 
 ```
-- order book l2 25
-- order book l2 200
-- trade
-- instrument info
-- k-line
+- orderbook l2 25, 200
+- trades
+- instruments info
+- k-lines
 - liquidations
 ```
 
@@ -170,17 +175,19 @@ Example output:
 
 <br>
 
-#### subscribing to private execution reports
+---
+
+##### subscribing to private execution reports
 
 Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
 
-Select `exec`:
+Select `3`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ exec: subscribe to private topics (e.g. execution)
+➡ 3: sub to public perpetual info topics
 ```
 
 <br>
@@ -188,8 +195,8 @@ Select `exec`:
 This will open a websocket with bybit and subscribe to your private account on the following topics:
 
 ```
-- ticket info sequence
-- outbound account info sequence
+- ticket info sequences
+- outbound account info sequences
 ```
 
 
@@ -198,17 +205,17 @@ This will open a websocket with bybit and subscribe to your private account on t
 ---
 
 
-#### subscribing to private positions
+##### subscribing to private positions
 
 Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
 
-Select `positions`:
+Select `4`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ positions: subscribe to private positions topics 
+➡ 4: sub to spot local order book topics
 ```
 
 <br>
@@ -216,11 +223,11 @@ Select `positions`:
 This will open a websocket with bybit and subscribe to your private positions on the following topics:
 
 ```
-- position
-- execution
-- order
-- stop order
-- wallet
+- positions
+- executions
+- orders
+- stop orders
+- wallets
 ```
 
 
@@ -228,14 +235,14 @@ This will open a websocket with bybit and subscribe to your private positions on
 
 ---
 
-#### subscribing to spot local order book
+##### subscribing to spot local order book
 
-Select `spot`:
+Select `5`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ spot: subscribe to spot local order book topics 
+➡ 5: sub to private execution topics
 ```
 
 <br>
@@ -243,8 +250,8 @@ Select `spot`:
 This will open a websocket with bybit and subscribe to your private positions on the following topics:
 
 ```
-- trade
-- diff depth
+- trades
+- diff depths
 ```
 
 
@@ -283,27 +290,44 @@ Example output:
 1216.63              3.31   
 ```
 
+
+
 <br>
 
 ---
 
-## TODO
+##### subscribing to perpetuals info
 
-* [ ] add support for binance
-* [ ] add support for bitmex
-* [ ] add dexes support
-* [ ] add deployment
-* [ ] add contracts
-* [ ] add backtest framework
-* [ ] add testing suite
-* [ ] add benchmarking
+Select `6`:
+
+```
+🐊 welcome to coingator 🪙. type your option:
+
+➡ 6: sub to private positions topics
+```
+
+<br>
+
+This will open a websocket with bybit and subscribe to perpetual data on the following topics:
+
+```
+- orderbook l2 25, 200
+- trades
+- insurances
+- instrument info
+- k-lines
+- liquidations
+```
 
 
 <br>
+
 
 ---
 
 ## resources
+
+<br>
 
 * [Evaluation of Dynamic Cointegration-Based Pairs Trading Strategy in the Cryptocurrency Market (arxiv:2109.10662)](https://arxiv.org/abs/2109.10662)
     - *"By considering the main limitations in the market microstructure, our

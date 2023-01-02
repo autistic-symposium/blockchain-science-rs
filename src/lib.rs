@@ -10,12 +10,13 @@ use crate::markets::bbit;
 pub async fn run() {
     
     println!("\n🐊 welcome to coingator 🪙. type your option:\n");
-    println!("➡ coin: subscribe to public topics for a coin (eg. ETHUSDT)");
-    println!("➡ pairs: subscribe to public topics for a pair (e.g. BTCUSDT, ETHUSDT)");
-    println!("➡ exec: subscribe to private topics (e.g. execution)");
-    println!("➡ positions: subscribe to private positions topics");
-    println!("➡ spot: subscribe to spot local order book topics");
-    println!("➡ perpetual: subscribe perpetual info topics\n");
+    println!("➡ 1: sub to public topics for a derivative (eg. ETHUSDT)");
+    println!("➡ 2: sub to public topics for a pair of derivatives");
+    println!("➡ 3: sub to public perpetual info topics");
+    println!("➡ 4: sub to spot local order book topics");
+    println!("➡ 5: sub to private execution topics");
+    println!("➡ 6: sub to private positions topics\n");
+
 
     // create an argument input
     let mut input = String::new();
@@ -34,12 +35,12 @@ pub async fn run() {
     
     if cex == "bybit" {
         match command {
-            "coin" => bbit::subscribe_coin().await,
-            "pairs" => bbit::subscribe_pairs().await,
-            "exec" => bbit::subscribe_exec().await,
-            "positions" => bbit::subscribe_positions().await,
-            "spot" => bbit::subscribe_spot().await,
-            "perpetual" => bbit::subscribe_perpetual().await,
+            "1" => bbit::subscribe_coin().await,
+            "2" => bbit::subscribe_pairs().await,
+            "3" => bbit::subscribe_perpetual().await,
+            "4" => bbit::subscribe_spot().await,
+            "5" => bbit::subscribe_exec().await,
+            "6" => bbit::subscribe_positions().await,
             _ => println!("command not found: {}", command),
         }
     
