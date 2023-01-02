@@ -20,8 +20,6 @@ For more details about this searcher on my Mirror post, **[bot #2: coingator, a 
 #### cexes
 
 * [bybit](https://www.bybit.com/en-US/)
-* [binance](https://www.binance.us/) (tba)
-* [bitmex](https://www.bitmex.com/) (tba)
 
 #### dexes
 
@@ -168,14 +166,6 @@ This will open a websocket with bybit and subscribe to your private account on t
 
 <br>
 
-Example output:
-
-```
-
-```
-
-<br>
-
 ---
 
 
@@ -204,14 +194,6 @@ This will open a websocket with bybit and subscribe to your private positions on
 - wallet
 ```
 
-
-<br>
-
-Example output:
-
-```
-
-```
 
 
 <br>
