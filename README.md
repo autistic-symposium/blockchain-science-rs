@@ -13,15 +13,43 @@ For more details about this searcher on my Mirror post, **[bot #2: coingator, a 
 
 ## strategies
 
-#### statistical methods
+> One of the most well-known strategies among different algorithmic trading methods is
+the statistical arbitrage strategy: a profitable situation stemming from pricing inefficiencies among financial markets. Statistical arbitrage is not a real arbitrage opportunity, but it is merely possible to obtain profit applying past statistics.
 
-* [cointegration](https://en.wikipedia.org/wiki/Cointegration): test correlation between two or more non-stationary time series in the long run or for a specified period (identifying long run parameters and determining when stationary time series do not depart from equilibrium.)
+<br>
+#### cointegration
 
-#### cexes
+* [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the test correlation between two or more non-stationary time series for a specified period (identifying long run parameters and determining when stationary time series do not depart from equilibrium).
+* this strategy consists of the following steps:
+
+```
+    1. get the list of tradeable symbols
+    2. construct and save price history
+    3. find cointegrated pairs
+    4. find trends
+    5. backtest
+```
+
+<br>
+
+#### monitoring
+
+The following can be monitored through websockets:
+
+* spot local orderbook, depth, k-lines, trades, and private execution reports
+* inverse private positions, executions, orders, stop orders
+* inverse public orderbooks, trades, insurances, perpertuals, futures, k-lines, liquidations
+
+
+<br>
+
+#### supported features
+
+##### cexes
 
 * [bybit](https://www.bybit.com/en-US/)
 
-#### dexes
+##### dexes
 
 
 <br>
@@ -62,7 +90,7 @@ make run
 
 <br>
 
-### subscribing for topics for a coin
+#### subscribing for topics for a coin
 
 
 Select `coin`:
@@ -102,7 +130,7 @@ Example output:
 
 <br>
 
-### subscribing for topics for a pair
+#### subscribing for topics for a pair
 
 Select `pairs`:
 
@@ -141,7 +169,7 @@ Example output:
 
 <br>
 
-### subscribing to private execution reports
+#### subscribing to private execution reports
 
 Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
@@ -169,7 +197,7 @@ This will open a websocket with bybit and subscribe to your private account on t
 ---
 
 
-### subscribing to private positions
+#### subscribing to private positions
 
 Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
@@ -195,9 +223,92 @@ This will open a websocket with bybit and subscribe to your private positions on
 ```
 
 
+<br>
+
+---
+
+#### subscribing to spot local order book
+
+Select `spot`:
+
+```
+🐊 welcome to coingator 🪙. type your option:
+
+➡ spot: subscribe to spot local order book topics 
+```
+
+<br>
+
+This will open a websocket with bybit and subscribe to your private positions on the following topics:
+
+```
+- trade
+- diff depth
+```
+
+
+<br>
+
+Example output:
+
+
+
+```
+✨🐊 ETHUSDT order book
+
+💰 price              🛍 quantity            
+1217.31              1.71858             
+1217.29              0.9398              
+1217.28              3.17709             
+1217.25              1.71                
+1217.24              3.27                
+1217.23              5                   
+1217.19              0.25474             
+1217.15              0.08218             
+1217.14              5.18416             
+1217.09              5.0018              
+
+🔻 1216.27
+
+1216.98              0.1489              
+1216.94              0.08218             
+1216.92              0.3                 
+1216.85              6.01827             
+1216.8               0.09138             
+1216.71              0.3                 
+1216.7               2.06                
+1216.67              0.08347             
+1216.66              5.03956             
+1216.63              3.31   
+```
+
+<br>
+
+---
+
+## TODO
+
+* [ ] add support for binance
+* [ ] add support for bitmex
+* [ ] add dexes support
+* [ ] add deployment
+* [ ] add contracts
+* [ ] add backtest framework
+* [ ] add testing suite
+* [ ] add benchmarking
+
 
 <br>
 
 ---
 
 ## resources
+
+* [Evaluation of Dynamic Cointegration-Based Pairs Trading Strategy in the Cryptocurrency Market (arxiv:2109.10662)](https://arxiv.org/abs/2109.10662)
+    - *"By considering the main limitations in the market microstructure, our
+strategy exceeds the naive buy-and-hold approach in the Bitmex exchange. Another
+significant finding is that we implement a numerous collection of cryptocurrency coins
+to formulate the model’s spread, which improves the risk-adjusted profitability of the
+pairs trading strategy. Besides, the strategy’s maximum drawdown level is reasonably
+low, which makes it useful to be deployed. The results also indicate that a class of
+coins has better potential arbitrage opportunities than others."*

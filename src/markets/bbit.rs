@@ -1,9 +1,17 @@
 // buybit.rs - author: steinkirch
 
 use std::env;
+use std::io::{self, Write};
 use bybit::linear::{PublicResponse, PublicWebSocketApiClient};
 use bybit::inverse::{PrivateResponse, PrivateWebSocketApiClient};
-use bybit::spot::ws::{PublicV2Response, PublicV2WebSocketApiClient, PrivateResponse as OtherPrivateResponse, PrivateWebSocketApiClient as OtherPrivateWebSocketApiClient};
+use bybit::spot::ws::{OrderBookItem, PublicV2Response, PublicV2WebSocketApiClient,
+                      PublicResponse as OtherPublicResponse, 
+                      PublicWebSocketApiClient as OtherPublicWebSocketApiClient, 
+                      PrivateResponse as OtherPrivateResponse, 
+                      PrivateWebSocketApiClient as OtherPrivateWebSocketApiClient};
+
+
+struct OwnedOrderBookItem(String, String);
 
 
 pub async fn subscribe_coin() {
@@ -126,4 +134,155 @@ pub async fn subscribe_positions() {
         Ok(_) => {}
         Err(e) => println!("{}", e),
     }
+}
+
+
+pub async fn subscribe_spot () {
+
+    let coin = &env::var("COIN").expect("⛔️ COIN must be set on .env file");
+    let mut client = OtherPublicWebSocketApiClient::new();
+
+    let stdout = io::stdout();
+    let mut handle = io::BufWriter::new(stdout);
+    let mut latest_price: String = String::new();
+    let mut direction = "🔺";
+    let mut asks: Vec<OwnedOrderBookItem> = Vec::new();
+    let mut bids: Vec<OwnedOrderBookItem> = Vec::new();
+
+    client.subscribe_trade(coin, false);
+    client.subscribe_diff_depth(coin, false);
+
+    let callback = |res: OtherPublicResponse| {
+        match res {
+            OtherPublicResponse::Trade(res) => {
+                let price = res.data[0].p.to_owned();
+                if price < latest_price {
+                    direction = "🔻";
+                } else if price > latest_price {
+                    direction = "🔺";
+                }
+                latest_price = price
+            }
+            OtherPublicResponse::Depth(res) => {
+                res.data[0].a.iter().for_each(|&OrderBookItem(price, qty)| {
+                    asks.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                });
+                res.data[0].b.iter().for_each(|&OrderBookItem(price, qty)| {
+                    bids.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                });
+            }
+
+            OtherPublicResponse::DiffDepth(res) => {
+            
+                ////////////
+                // ASKS
+                ////////////
+                let a = &res.data[0].a;
+                let mut i: usize = 0;
+                let mut j: usize = 0;
+
+                while i < a.len() {
+                    let OrderBookItem(price, qty) = a[i];
+
+                    while j < asks.len() {
+                        let item = &mut asks[j];
+                        let item_price: &str = &item.0;
+                        if price < item_price {
+                            asks.insert(j, OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                            i += 1;
+                            j += 1;
+                            break;
+                        }
+
+                        if price == item_price {
+                            if qty != "0" {
+                                item.1 = qty.to_owned();
+                                i += 1;
+                                j += 1;
+                            } else {
+                                asks.remove(j);
+                                i += 1;
+                            }
+                            break;
+                        }
+
+                        j += 1;
+                    }
+
+                    if j == asks.len() {
+                        a.iter().skip(i).for_each(|&OrderBookItem(price, qty)| {
+                            asks.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                        });
+                        break;
+                    }
+                }
+
+                ////////////
+                // BIDS
+                ////////////
+                let b = &res.data[0].b;
+                let mut i: usize = 0;
+                let mut j: usize = 0;
+
+                while i < b.len() {
+                    let OrderBookItem(price, qty) = b[i];
+
+                    while j < bids.len() {
+                        let item = &mut bids[j];
+                        let item_price: &str = &item.0;
+                        if price > item_price {
+                            bids.insert(j, OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                            i += 1;
+                            j += 1;
+                            break;
+                        }
+
+                        if price == item_price {
+                            if qty != "0" {
+                                item.1 = qty.to_owned();
+                                i += 1;
+                                j += 1;
+                            } else {
+                                bids.remove(j);
+                                i += 1;
+                            }
+                            break;
+                        }
+
+                        j += 1;
+                    }
+
+                    if j == bids.len() {
+                        b.iter().skip(i).for_each(|&OrderBookItem(price, qty)| {
+                            bids.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                        });
+                        break;
+                    }
+                }
+            }
+            _ => {}
+        }
+
+        ////////////
+        // ASKS
+        ////////////
+        write!(handle, "\n✨🐊{} orderbook\n\n", coin).unwrap();
+        write!(handle, "{:<20} {:<20}\n", "💰 price", "🛍 quantity").unwrap();
+        let mut asks_10 = asks.iter().take(10).collect::<Vec<_>>().clone();
+        asks_10.reverse();
+        asks_10.iter().for_each(|item| {
+            write!(handle, "{:<20} {:<20}\n", item.0, item.1).unwrap();
+        });
+        write!(handle, "\n{} {}\n\n", direction, latest_price).unwrap();
+        bids.iter().take(10).for_each(|item| {
+            write!(handle, "{:<20} {:<20}\n", item.0, item.1).unwrap();
+        });
+        handle.flush().unwrap();
+    };
+
+    match client.run(callback) {
+        Ok(_) => {}
+        Err(e) => println!("{}", e),
+    }
+
 }

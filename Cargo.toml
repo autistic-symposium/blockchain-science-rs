@@ -2,7 +2,6 @@
 name = "coingator"
 version = "0.1.0"
 edition = "2021"
-author = ["steinkirch"]
 
 [lib]
 path = "src/lib.rs"
