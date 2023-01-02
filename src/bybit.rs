@@ -9,7 +9,7 @@ pub async fn subscribe_coin() {
 
     let coin = &env::var("COIN").expect("⛔️ COIN must be set on .env file");
     let mut client = PublicV2WebSocketApiClient::new();
-    println!("👾 subcribing to websockets for: {:?}", coin);
+    println!("🐊 subcribing to websockets for: {:?}", coin);
 
     client.subscribe_depth(coin, false);
     client.subscribe_trade(coin, false);
@@ -38,7 +38,7 @@ pub async fn subscribe_pairs() {
     
     let pairs = &env::var("PAIRS").expect("⛔️ PAIRS must be set on .env file");
     let symbols: Vec<&str> = pairs.split(",").collect();
-    println!("👾 subcribing to websockets for: {:?}", symbols);
+    println!("🐊 subcribing to websockets for: {:?}", symbols);
 
     let mut client = PublicWebSocketApiClient::new();
 

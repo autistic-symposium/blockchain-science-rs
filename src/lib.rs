@@ -7,7 +7,7 @@ mod bybit;
 
 pub async fn run() {
     
-    println!("\n🏭 welcome to coingator 🪙. type your option:\n");
+    println!("\n🐊 welcome to coingator 🪙. type your option:\n");
     println!("➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)");
     println!("➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)\n");
 
