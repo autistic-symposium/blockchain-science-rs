@@ -1,8 +1,10 @@
 // lib.rs - author: steinkirch
 
+
 use std::env;
 
-mod bybit;
+pub mod markets;
+use crate::markets::bbit;
 
 
 pub async fn run() {
@@ -30,10 +32,10 @@ pub async fn run() {
     
     if cex == "bybit" {
         match command {
-            "coin" => bybit::subscribe_coin().await,
-            "pairs" => bybit::subscribe_pairs().await,
-            "exec" => bybit::subscribe_exec().await,
-            "positions" => bybit::subscribe_positions().await,
+            "coin" => bbit::subscribe_coin().await,
+            "pairs" => bbit::subscribe_pairs().await,
+            "exec" => bbit::subscribe_exec().await,
+            "positions" => bbit::subscribe_positions().await,
             _ => println!("command not found: {}", command),
         }
     
