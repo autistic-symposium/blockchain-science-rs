@@ -1,17 +1,18 @@
-// buybit.rs - author: steinkirch
+// bbit.rs - author: steinkirch
 
 use std::env;
 use std::io::{self, Write};
 use bybit::linear::{PublicResponse, PublicWebSocketApiClient};
-use bybit::inverse::{PrivateResponse, PrivateWebSocketApiClient};
 use bybit::spot::ws::{OrderBookItem, PublicV2Response, PublicV2WebSocketApiClient,
                       PublicResponse as OtherPublicResponse, 
                       PublicWebSocketApiClient as OtherPublicWebSocketApiClient, 
                       PrivateResponse as OtherPrivateResponse, 
                       PrivateWebSocketApiClient as OtherPrivateWebSocketApiClient};
+use bybit::inverse::{PrivateResponse, PrivateWebSocketApiClient, 
+                      PublicResponse as OtherOtherPublicResponse, 
+                      PublicWebSocketApiClient as OtherOtherPublicWebSocketApiClient};
 
-
-struct OwnedOrderBookItem(String, String);
+struct PrivOrderBookItem(String, String);
 
 
 pub async fn subscribe_coin() {
@@ -60,15 +61,15 @@ pub async fn subscribe_pairs() {
 
     let callback = |res: PublicResponse| match res {
         PublicResponse::OrderBookL2Snapshot(res) => println!("✅ order book L2 snapshot: {:?}", res),
-        PublicResponse::OrderBookL2Delta(res) => println!("✅ order book L2 delta: {:?}", res),
+        PublicResponse::OrderBookL2Delta(res) => println!("✅ order book L2 Δ: {:?}", res),
         PublicResponse::Trade(res) => println!("✅ trade: {:?}", res),
         PublicResponse::InstrumentInfoSnapshot(res) => {
             println!("✅ instrument info snapshot: {:?}", res)
         }
         PublicResponse::InstrumentInfoDelta(res) => {
-            println!("✅ instrument info delta: {:?}", res)
+            println!("✅ instrument info Δ: {:?}", res)
         }
-        PublicResponse::Kline(res) => println!("✅ kline: {:?}", res),
+        PublicResponse::Kline(res) => println!("✅ k-line: {:?}", res),
         PublicResponse::Liquidation(res) => println!("✅ liquidation: {:?}", res),
     };
 
@@ -146,8 +147,8 @@ pub async fn subscribe_spot () {
     let mut handle = io::BufWriter::new(stdout);
     let mut latest_price: String = String::new();
     let mut direction = "🔺";
-    let mut asks: Vec<OwnedOrderBookItem> = Vec::new();
-    let mut bids: Vec<OwnedOrderBookItem> = Vec::new();
+    let mut asks: Vec<PrivOrderBookItem> = Vec::new();
+    let mut bids: Vec<PrivOrderBookItem> = Vec::new();
 
     client.subscribe_trade(coin, false);
     client.subscribe_diff_depth(coin, false);
@@ -165,10 +166,10 @@ pub async fn subscribe_spot () {
             }
             OtherPublicResponse::Depth(res) => {
                 res.data[0].a.iter().for_each(|&OrderBookItem(price, qty)| {
-                    asks.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                    asks.push(PrivOrderBookItem(price.to_owned(), qty.to_owned()));
                 });
                 res.data[0].b.iter().for_each(|&OrderBookItem(price, qty)| {
-                    bids.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                    bids.push(PrivOrderBookItem(price.to_owned(), qty.to_owned()));
                 });
             }
 
@@ -188,7 +189,7 @@ pub async fn subscribe_spot () {
                         let item = &mut asks[j];
                         let item_price: &str = &item.0;
                         if price < item_price {
-                            asks.insert(j, OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                            asks.insert(j, PrivOrderBookItem(price.to_owned(), qty.to_owned()));
                             i += 1;
                             j += 1;
                             break;
@@ -211,7 +212,7 @@ pub async fn subscribe_spot () {
 
                     if j == asks.len() {
                         a.iter().skip(i).for_each(|&OrderBookItem(price, qty)| {
-                            asks.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                            asks.push(PrivOrderBookItem(price.to_owned(), qty.to_owned()));
                         });
                         break;
                     }
@@ -231,7 +232,7 @@ pub async fn subscribe_spot () {
                         let item = &mut bids[j];
                         let item_price: &str = &item.0;
                         if price > item_price {
-                            bids.insert(j, OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                            bids.insert(j, PrivOrderBookItem(price.to_owned(), qty.to_owned()));
                             i += 1;
                             j += 1;
                             break;
@@ -254,7 +255,7 @@ pub async fn subscribe_spot () {
 
                     if j == bids.len() {
                         b.iter().skip(i).for_each(|&OrderBookItem(price, qty)| {
-                            bids.push(OwnedOrderBookItem(price.to_owned(), qty.to_owned()));
+                            bids.push(PrivOrderBookItem(price.to_owned(), qty.to_owned()));
                         });
                         break;
                     }
@@ -266,7 +267,7 @@ pub async fn subscribe_spot () {
         ////////////
         // ASKS
         ////////////
-        write!(handle, "\n✨🐊{} orderbook\n\n", coin).unwrap();
+        write!(handle, "\n✨🐊 {} orderbook\n\n", coin).unwrap();
         write!(handle, "{:<20} {:<20}\n", "💰 price", "🛍 quantity").unwrap();
         let mut asks_10 = asks.iter().take(10).collect::<Vec<_>>().clone();
         asks_10.reverse();
@@ -278,6 +279,50 @@ pub async fn subscribe_spot () {
             write!(handle, "{:<20} {:<20}\n", item.0, item.1).unwrap();
         });
         handle.flush().unwrap();
+    };
+
+    match client.run(callback) {
+        Ok(_) => {}
+        Err(e) => println!("{}", e),
+    }
+
+}
+
+
+pub async fn subscribe_perpetual() {
+
+    let mut client = OtherOtherPublicWebSocketApiClient::new();
+
+    let pairs = &env::var("PAIRS").expect("⛔️ PAIRS must be set on .env file");
+    let symbols: Vec<&str> = pairs.split(",").collect();
+
+    client.subscribe_order_book_l2_25(&symbols);
+    client.subscribe_order_book_l2_200(&symbols);
+    client.subscribe_trade(&symbols);
+    client.subscribe_insurance(&symbols);
+    client.subscribe_instrument_info(&symbols);
+    client.subscribe_kline(&symbols, "1");
+    client.subscribe_liquidation(&symbols);
+
+    let callback = |res: OtherOtherPublicResponse| match res {
+        OtherOtherPublicResponse::OrderBookL2Snapshot(res) => println!("✅ orderbook L2 snapshot: {:?}", res),
+        OtherOtherPublicResponse::OrderBookL2Delta(res) => println!("✅ orderbook L2 Δ: {:?}", res),
+        OtherOtherPublicResponse::Trade(res) => println!("✅ trade: {:?}", res),
+        OtherOtherPublicResponse::Insurance(res) => println!("✅ insurance: {:?}", res),
+        OtherOtherPublicResponse::PerpetualInstrumentInfoSnapshot(res) => {
+            println!("✅ perpetual instrument info snapshot: {:?}", res)
+        }
+        OtherOtherPublicResponse::PerpetualInstrumentInfoDelta(res) => {
+            println!("✅ perpetual instrument info Δ: {:?}", res)
+        }
+        OtherOtherPublicResponse::FuturesInstrumentInfoSnapshot(res) => {
+            println!("✅ futures instrument info snapshot: {:?}", res)
+        }
+        OtherOtherPublicResponse::FuturesInstrumentInfoDelta(res) => {
+            println!("✅ futures instrument info Δ: {:?}", res)
+        }
+        OtherOtherPublicResponse::Kline(res) => println!("✅ k-line: {:?}", res),
+        OtherOtherPublicResponse::Liquidation(res) => println!("✅ liquidation: {:?}", res),
     };
 
     match client.run(callback) {
