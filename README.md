@@ -48,7 +48,7 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 
 ```
     * spot pair orderbook, depth, k-lines, and private execution reports
-    * inverse public orderbooks, trades, insurances, perpertuals, futures, liquidations
+    * inverse public orderbooks, trades, insurances, perpetuals, futures, liquidations
     * inverse private positions, executions, stop orders
 ```
 
@@ -105,8 +105,13 @@ make run
 
 ---
 
-#### subscribing for topics for a derivative
+#### subscribing to topics on a derivative
 
+<br>
+
+> **Crypto derivatives** are financial contracts that derive their values from underlying assets. **Crypto futures** contracts are proxy tools to speculate on the future prices of cryptocurrencies or to be used to hedge against their price changes.
+
+<br>
 
 Select `1`:
 
@@ -147,7 +152,7 @@ Example output:
 
 ---
 
-#### subscribing for topics for a pair
+#### subscribing to topics for a pair of crypto assets
 
 Select `2`:
 
@@ -160,7 +165,7 @@ Select `2`:
 
 <br>
 
-This will open a websocket with bybit and subscribe the `pairs` to the following topics:
+This will open a websocket with bybit and subscribe the pair to the following topics:
 
 ```
 - orderbook l2 25, 200
@@ -225,7 +230,7 @@ This will open a websocket with bybit and subscribe to the following topics:
 
 
 
-#### subscribing to spot local order book
+#### subscribing to the spot local order book
 
 <br>
 
@@ -357,7 +362,7 @@ This will open a websocket with bybit and subscribe to private positions on the 
 
 <br>
 
-> BitMEX offers futures and perpetual contracts and allows trading with a high leverage. It also offers perpetual swaps and future contracts with an inverse (Quanto payout).
+> BitMEX offers futures and perpetual contracts and allows trading with high leverage. It also offers perpetual swaps and future contracts with an inverse (Quanto payout).
 
 
 <br>
