@@ -73,14 +73,11 @@ Select `coin`:
 🐊 welcome to coingator 🪙. type your option:
 
 ➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)
-➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)
-
-coin
 ```
 
 <br>
 
-This will open a websocket with bybit and subscribe the coin to the following topics:
+This will open a websocket with bybit and subscribe the `coin` to the following topics:
 
 ```
 - depth
@@ -114,16 +111,13 @@ Select `pairs`:
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)
 ➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)
-
-pairs
 ```
 
 
 <br>
 
-This will open a websocket with bybit and subscribe the pairs to the following topics:
+This will open a websocket with bybit and subscribe the `pairs` to the following topics:
 
 ```
 - order book l2 25
@@ -149,6 +143,39 @@ Example output:
 
 <br>
 
+### subscribing to private execution reports
+
+Get your API creds from [bybit](). You could also use their [testnet](https://testnet.bybit.com/).
+
+
+Select `exec`:
+
+```
+🐊 welcome to coingator 🪙. type your option:
+
+➡ exec: subscribe to private topics (e.g. execution)
+```
+
+<br>
+
+This will open a websocket with bybit and subscribe to your private account on the following topics:
+
+```
+- ticket info sequence
+- outbound account info sequence
+```
+
+
+<br>
+
+Example output:
+
+```
+
+```
+
+
+<br>
 
 ---
 
