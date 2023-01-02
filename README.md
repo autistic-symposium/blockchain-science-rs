@@ -23,6 +23,9 @@ For more details about this searcher on my Mirror post, **[bot #2: coingator, a 
 * [binance](https://www.binance.us/) (tba)
 * [bitmex](https://www.bitmex.com/) (tba)
 
+#### dexes
+
+
 <br>
 
 ---
@@ -88,7 +91,7 @@ Example output:
 
 <br>
 
-#### subscribing for topics for a coin
+#### subscribing for topics for a pair
 
 Select `pairs`:
 
