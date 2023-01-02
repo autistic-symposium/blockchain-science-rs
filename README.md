@@ -22,10 +22,10 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 
 * [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long-run parameters and determining when stationary time series do not depart from equilibrium).
 
->  Formally, if **(X,Y,Z)** are each integrated of order **d**, and there exist coefficients **a, b, c** such that **aX + bY + cZ** is integrated of order less than **d**, then **X**, **Y**, and **Z** are cointegrated.
+>  Formally, if **(X,Y,Z)** are each integrated of order **d**, and there exist coefficients **a, b, c** such that **aX + bY + cZ** is integrated of the order less than **d**, then **X**, **Y**, and **Z** are cointegrated.
 
 
-* in this packages, we implement this strategy with the following steps:
+* in this tool, we implement this strategy with the following steps:
 
 ```
     1. retrieve a list of tradeable symbols
@@ -44,7 +44,7 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 
 #### with [bybit](https://www.bybit.com/en-US/)
 
-* using this code, we use websockets an bybit's API to monitor the following:
+* using this code, we use websockets and bybit's API to monitor the following:
 
 ```
     * spot pair orderbook, depth, k-lines, and private execution reports
