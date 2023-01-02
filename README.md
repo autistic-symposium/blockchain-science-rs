@@ -53,9 +53,7 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 
 ---
 
-## running
-
-#### local set up
+## local set up
 
 Make sure you have [rust](https://www.rust-lang.org/tools/install) installed and add info to a `.env` file:
 
@@ -83,19 +81,26 @@ make run
 
 ---
 
-#### running with bybit
+## running with bybit
+
+
+<br>
+
+<img width="410" alt="Screen Shot 2023-01-02 at 12 42 02 PM" src="https://user-images.githubusercontent.com/1130416/210276655-195a8d22-4317-48ea-94ed-cda7c6b32049.png">
 
 
 <br>
 
 
-* [bybit REST endpoints](https://bybit-exchange.github.io/docs/spot/v1/#t-authentication):
+##### [bybit REST endpoints](https://bybit-exchange.github.io/docs/spot/v1/#t-authentication):
     - Testnet: https://api-testnet.bybit.com 
     - Mainnet: https://api.bybit.com, https://api.bytick.com 
 
 <br>
 
-##### subscribing for topics for a coin
+---
+
+#### subscribing for topics for a coin
 
 
 Select `1`:
@@ -137,7 +142,7 @@ Example output:
 
 ---
 
-##### subscribing for topics for a pair
+#### subscribing for topics for a pair
 
 Select `2`:
 
@@ -177,7 +182,7 @@ Example output:
 
 ---
 
-##### subscribing to private execution reports
+#### subscribing to private execution reports
 
 Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
@@ -205,7 +210,7 @@ This will open a websocket with bybit and subscribe to your private account on t
 ---
 
 
-##### subscribing to private positions
+#### subscribing to private positions
 
 Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
@@ -235,7 +240,7 @@ This will open a websocket with bybit and subscribe to your private positions on
 
 ---
 
-##### subscribing to spot local order book
+#### subscribing to spot local order book
 
 Select `5`:
 
@@ -296,7 +301,7 @@ Example output:
 
 ---
 
-##### subscribing to perpetuals info
+#### subscribing to perpetuals info
 
 Select `6`:
 
