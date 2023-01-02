@@ -1,4 +1,4 @@
-# 🐊🤖 COINGATOR: Stat Rusty Searcher 👾✨
+# 🐊🤖 COINGATOR: a Statistical Rusty Searcher 👾✨
 
 
 <br>
@@ -12,9 +12,9 @@
 ### tl; dr
 
 
-#### This program implements an arb searcher running statistical arbitrage strategies to several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
+#### this program implements a searcher running statistical strategies on several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
 
-#### For more details about this project, check my Mirror post, **[bot #2: coingator, the rusty cointegratooor searcher]()**.
+#### for more details about this project, check my mirror post: **[bot #2: coingator, the rusty cointegratooor searcher]()**.
 
 
 <br>
