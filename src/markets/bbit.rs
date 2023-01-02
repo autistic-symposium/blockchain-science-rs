@@ -23,7 +23,7 @@ pub async fn subscribe_coin() {
 
     let derivative = &env::var("DERIVATIVE").expect("⛔️ DERIVATIVE must be set on .env file");
     let mut client = PublicV2WebSocketApiClient::new();
-    println!("🐊 subcribing to websockets for: {:?} \n", derivative);
+    println!("🐊 subscribing to websockets for: {:?} \n", derivative);
 
     client.subscribe_depth(derivative, false);
     client.subscribe_trade(derivative, false);
@@ -52,7 +52,7 @@ pub async fn subscribe_pairs() {
     
     let pairs = &env::var("DERIVATIVE_PAIR").expect("⛔️ DERIVATIVE_PAIR must be set on .env file");
     let symbols: Vec<&str> = pairs.split(",").collect();
-    println!("🐊 subcribing to websockets for: {:?} \n", symbols);
+    println!("🐊 subscribing to websockets for: {:?} \n", symbols);
 
     let mut client = PublicWebSocketApiClient::new();
 
@@ -89,6 +89,8 @@ pub async fn subscribe_spot () {
 
     let derivative = &env::var("DERIVATIVE").expect("⛔️ DERIVATIVE must be set on .env file");
     let mut client = OtherPublicWebSocketApiClient::new();
+
+    println!("🐊 subscribing to websockets for: {:?} \n", derivative);
 
     let stdout = io::stdout();
     let mut handle = io::BufWriter::new(stdout);
@@ -243,6 +245,8 @@ pub async fn subscribe_perpetual() {
     let pairs = &env::var("DERIVATIVE_PAIR").expect("⛔️ DERIVATIVE_PAIR must be set on .env file");
     let symbols: Vec<&str> = pairs.split(",").collect();
 
+    println!("🐊 subscribing to websockets for: {:?} \n", pairs);
+
     client.subscribe_order_book_l2_25(&symbols);
     client.subscribe_order_book_l2_200(&symbols);
     client.subscribe_trade(&symbols);
@@ -289,7 +293,7 @@ pub async fn subscribe_exec() {
     let api_key = &env::var("BYBIT_API_KEY").expect("⛔️ BYBIT_API_KEY must be set on .env file");
     let api_secret = &env::var("BYBIT_API_SECRET").expect("⛔️ BYBIT_API_SECRET must be set on .env file");
 
-    println!("🐊 subcribing to private executions websockets: \n");
+    println!("🐊 subscribing to private executions websockets: \n");
 
     let client = OtherPrivateWebSocketApiClient::builder().testnet()
                                 .build_with_credentials(&api_key, &api_secret);
@@ -316,7 +320,7 @@ pub async fn subscribe_positions() {
     let api_key = &env::var("BYBIT_API_KEY").expect("⛔️ BYBIT_API_KEY must be set on .env file");
     let api_secret = &env::var("BYBIT_API_SECRET").expect("⛔️ BYBIT_API_SECRET must be set on .env file");
 
-    println!("🐊 subcribing to private positions websockets: \n");
+    println!("🐊 subscribing to private positions websockets: \n");
 
     let mut client = PrivateWebSocketApiClient::new(api_key, api_secret);
 
