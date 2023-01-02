@@ -105,7 +105,7 @@ make run
 
 ---
 
-#### subscribing for topics for a coin
+#### subscribing for topics for a derivative
 
 
 Select `1`:
@@ -118,7 +118,7 @@ Select `1`:
 
 <br>
 
-This will open a websocket with bybit and subscribe the `coin` to the following topics:
+This will open a websocket with bybit and subscribe to the following derivative's topics:
 
 ```
 - depths
@@ -227,6 +227,12 @@ This will open a websocket with bybit and subscribe to the following topics:
 
 #### subscribing to spot local order book
 
+<br>
+
+> In the **spot market**, one canbuy and sell cryptocurrencies for **immediate delivery**. They are directly transferred between market participants (buyers and sellers), which have **direct ownership of the assets** and are entitled to **economic benefits**, such as voting for major forks or staking participation.
+
+<br>
+
 Select `4`:
 
 ```
@@ -237,7 +243,7 @@ Select `4`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to your private positions on the following topics:
+This will open a websocket with bybit and subscribe to spot info on the following topics:
 
 ```
 - trades
@@ -290,7 +296,7 @@ Example output:
 
 #### subscribing to private inverse execution reports
 
-Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
+Get your API creds from bybit. You can also use their [testnet](https://testnet.bybit.com/).
 
 
 Select `5`:
@@ -303,7 +309,7 @@ Select `5`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to your private account on the following topics:
+This will open a websocket with bybit and subscribe to a private account for the following topics:
 
 ```
 - ticket info sequences
@@ -331,7 +337,7 @@ Select `6`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to your private positions on the following topics:
+This will open a websocket with bybit and subscribe to private positions on the following topics:
 
 ```
 - positions
@@ -347,12 +353,36 @@ This will open a websocket with bybit and subscribe to your private positions on
 ---
 
 
+## running with [bitmex](https://www.bitmex.com/app/trade/XBTUSD) (to be added)
+
+<br>
+
+> BitMEX offers futures and perpetual contracts and allows trading with a high amount of leverage. It also offers perpetual swaps and future contracts that have an inverse (Quanto payout).
+
+
+<br>
+
+---
+
+
+## running with [binance](https://www.binance.com/en/support/faq/crypto-derivatives) (to be added)
+
+<br>
+
+> BitMEX offers futures and perpetual contracts and allows trading with a high amount of leverage. It also offers perpetual swaps and future contracts that have an inverse (Quanto payout).
+
+
+<br>
+
+---
+
+
 
 ## resources
 
 <br>
 
-* [Evaluation of Dynamic Cointegration-Based Pairs Trading Strategy in the Cryptocurrency Market (arxiv:2109.10662)](https://arxiv.org/abs/2109.10662)
+* [Cointegration-Based Pairs Trading Strategy in the Cryptocurrency Market (arxiv:2109.10662)](https://arxiv.org/abs/2109.10662)
     - *"By considering the main limitations in the market microstructure, our
 strategy exceeds the naive buy-and-hold approach in the Bitmex exchange. Another
 significant finding is that we implement a numerous collection of cryptocurrency coins
@@ -360,3 +390,8 @@ to formulate the model’s spread, which improves the risk-adjusted profitabilit
 pairs trading strategy. Besides, the strategy’s maximum drawdown level is reasonably
 low, which makes it useful to be deployed. The results also indicate that a class of
 coins has better potential arbitrage opportunities than others."*
+
+<br>
+
+* [Constructing Cointegrated Cryptocurrency Portfolios](https://towardsdatascience.com/constructing-cointegrated-cryptocurrency-portfolios-d0a27922891e)
+    - *As the cryptocurrency market continues to grow with new coins and new exchanges, it’s very important for individual investors, crypto-fund managers, as well as regulators to understand the price dependency among all cryptocurrencies, along with their derivatives.*
