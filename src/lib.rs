@@ -12,9 +12,9 @@ pub async fn run() {
     println!("\n🐊 welcome to coingator 🪙. type your option:\n");
     println!("➡ 1: sub to public topics for a derivative (eg. ETHUSDT)");
     println!("➡ 2: sub to public topics for a pair of derivatives");
-    println!("➡ 3: sub to public perpetual info topics");
+    println!("➡ 3: sub to public inverse perpetual info topics");
     println!("➡ 4: sub to spot local order book topics");
-    println!("➡ 5: sub to private execution topics");
+    println!("➡ 5: sub to private inverse execution topics");
     println!("➡ 6: sub to private positions topics\n");
 
 

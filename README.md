@@ -183,19 +183,26 @@ Example output:
 
 ---
 
-#### subscribing to perpetuals info
+#### subscribing to inverse perpetuals info
 
-Select `3`:
+<br>
+
+
+> A **perpetual contract** has no expiration data. At Bybit, funding occurs every amount of hours, and they use the interest rate and the premium index to calculate the funding through **Time-Weighted-Average-Price (TWAP)** over the series of minutes rates.
+
+<br>
+
+To subscribe to inverse perpetuals and futures info, select `3`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ 3: sub to public perpetual info topics
+➡ 3: sub to public inverse perpetual info topics
 ```
 
 <br>
 
-This will open a websocket with bybit and subscribe to perpetual data on the following topics:
+This will open a websocket with bybit and subscribe to the following topics:
 
 ```
 - orderbook l2 25, 200
@@ -277,7 +284,7 @@ Example output:
 
 
 
-#### subscribing to private execution reports
+#### subscribing to private inverse execution reports
 
 Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
@@ -287,7 +294,7 @@ Select `5`:
 ```
 🐊 welcome to coingator 🪙. type your option:
 
-➡ 5: sub to private execution topic
+➡ 5: sub to private inverse execution topics
 ```
 
 <br>
