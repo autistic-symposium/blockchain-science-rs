@@ -67,7 +67,7 @@ make run
 Select `coin`:
 
 ```
-🏭 welcome to cointbot 🪙. type your option:
+🏭 welcome to coingator 🪙. type your option:
 
 ➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)
 ➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)
@@ -96,7 +96,7 @@ Example output:
 Select `pairs`:
 
 ```
-🏭 welcome to cointbot 🪙. type your option:
+🏭 welcome to coingator 🪙. type your option:
 
 ➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)
 ➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)
