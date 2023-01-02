@@ -1,4 +1,4 @@
-# 🐊🤖 COINGATOR: Statistical Rusty Searcher 👾✨
+# 🐊🤖 COINGATOR: Stat Rusty Searcher 👾✨
 
 
 <br>
