@@ -358,29 +358,6 @@ This will open a websocket with bybit and subscribe to private positions on the 
 ---
 
 
-## running with [bitmex](https://www.bitmex.com/app/trade/XBTUSD) (to be added)
-
-<br>
-
-> BitMEX offers futures and perpetual contracts and allows trading with high leverage. It also offers perpetual swaps and future contracts with an inverse (Quanto payout).
-
-
-<br>
-
----
-
-
-## running with [binance](https://www.binance.com/en/support/faq/crypto-derivatives) (to be added)
-
-<br>
-
-> 
-
-
-<br>
-
----
-
 
 
 ## resources
