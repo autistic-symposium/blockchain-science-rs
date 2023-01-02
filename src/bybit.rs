@@ -1,7 +1,7 @@
 // buybit.rs - author: steinkirch
 
 use std::env;
-use bybit::spot::ws::{PublicV2Response, PublicV2WebSocketApiClient};
+use bybit::spot::ws::{PublicV2Response, PublicV2WebSocketApiClient, PrivateResponse, PrivateWebSocketApiClient};
 use bybit::linear::{PublicResponse, PublicWebSocketApiClient};
 
 
@@ -67,5 +67,32 @@ pub async fn subscribe_pairs() {
     match client.run(callback) {
         Ok(_) => {}
         Err(e) => println!("{}", e),    
+    }
+}
+
+
+pub async fn subscribe_exec() {
+    
+    let api_key = &env::var("BYBIT_API_KEY").expect("⛔️ BYBIT_API_KEY must be set on .env file");
+    let api_secret = &env::var("BYBIT_API_SECRET").expect("⛔️ BYBIT_API_SECRET must be set on .env file");
+
+    println!("🐊 subcribing to private websockets:");
+
+    let client = PrivateWebSocketApiClient::builder().testnet()
+                                .build_with_credentials(&api_key, &api_secret);
+
+    let callback = |res: PrivateResponse| match res {
+        PrivateResponse::ExecutionReportSequence(seq) => println!("✅ execution report: {:?}", seq),
+        PrivateResponse::TicketInfoSequence(seq) => println!("✅ ticket info: {:?}", seq),
+        PrivateResponse::OutboundAccountInfoSequence(seq) => {
+            println!("✅ outbound account info: {:?}", seq)
+        }
+        PrivateResponse::Pong(res) => println!("✅ pong: {:?}", res),
+        PrivateResponse::Ping(res) => println!("✅ ping: {:?}", res),
+    };
+
+    match client.run(callback) {
+        Ok(_) => {}
+        Err(e) => println!("{}", e),
     }
 }

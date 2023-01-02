@@ -8,8 +8,9 @@ mod bybit;
 pub async fn run() {
     
     println!("\n🐊 welcome to coingator 🪙. type your option:\n");
-    println!("➡ coin: subscribe to all topics for a coin (eg. ETHUSDT)");
-    println!("➡ pairs: subscribe to order books topics for a pair (e.g. BTCUSDT, ETHUSDT)\n");
+    println!("➡ coin: subscribe to public topics for a coin (eg. ETHUSDT)");
+    println!("➡ pairs: subscribe to public topics for a pair (e.g. BTCUSDT, ETHUSDT)");
+    println!("➡ exec: subscribe to private topics (e.g. execution)\n");
 
     // create an argument input
     let mut input = String::new();
@@ -30,6 +31,7 @@ pub async fn run() {
         match command {
             "coin" => bybit::subscribe_coin().await,
             "pairs" => bybit::subscribe_pairs().await,
+            "exec" => bybit::subscribe_exec().await,
             _ => println!("command not found: {}", command),
         }
     
