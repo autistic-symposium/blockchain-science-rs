@@ -1,15 +1,14 @@
 // lib.rs - author: steinkirch
 
-use std::env;
-
 mod buybit;
 
 
 pub async fn run() {
     
-    println!("🏭 welcome to cointbot 🪙. type your option: ");
-    println!("coin: get data for a currency (coin)");
-    println!("history: get price history for currency (coin) and time period (time)");
+    println!("\n🏭 welcome to cointbot 🪙. type your option:\n");
+    println!("➡ subscribe: subscribe to a topic");
+    println!("➡ coin: get data for a currency");
+    println!("➡ history: get price history for currency and time period\n");
 
     // create an argument input
     let mut input = String::new();
@@ -25,7 +24,8 @@ pub async fn run() {
 
     // match the command
     match command {
-        "coin" => buybit::coin().await,
+        "subscribe" => buybit::subscribe().await,
+        "topics" => buybit::coin().await,
         "history" => buybit::history().await,
         _ => println!("command not found: {}", command),
     }
