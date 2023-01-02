@@ -17,6 +17,7 @@ For more details about this searcher on my Mirror post, **[bot #2: coingator, a 
 the statistical arbitrage strategy: a profitable situation stemming from pricing inefficiencies among financial markets. Statistical arbitrage is not a real arbitrage opportunity, but it is merely possible to obtain profit applying past statistics.
 
 <br>
+
 #### cointegration
 
 * [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the test correlation between two or more non-stationary time series for a specified period (identifying long run parameters and determining when stationary time series do not depart from equilibrium).
