@@ -14,7 +14,8 @@ pub async fn run() {
     println!("➡ pairs: subscribe to public topics for a pair (e.g. BTCUSDT, ETHUSDT)");
     println!("➡ exec: subscribe to private topics (e.g. execution)");
     println!("➡ positions: subscribe to private positions topics");
-    println!("➡ spot: subscribe to spot local order book topics \n");
+    println!("➡ spot: subscribe to spot local order book topics");
+    println!("➡ perpetual: subscribe perpetual info topics\n");
 
     // create an argument input
     let mut input = String::new();
@@ -38,6 +39,7 @@ pub async fn run() {
             "exec" => bbit::subscribe_exec().await,
             "positions" => bbit::subscribe_positions().await,
             "spot" => bbit::subscribe_spot().await,
+            "perpetual" => bbit::subscribe_perpetual().await,
             _ => println!("command not found: {}", command),
         }
     
@@ -50,5 +52,6 @@ pub async fn run() {
     } else {
         println!("⛔️ {} is not a valid CEX", cex);
     }
+
 }
 
