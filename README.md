@@ -62,7 +62,10 @@ make run
 
 ## running with bybit
 
-#### subscribing for topics for a coin
+<br>
+
+### subscribing for topics for a coin
+
 
 Select `coin`:
 
@@ -77,6 +80,18 @@ coin
 
 <br>
 
+This will open a websocket with bybit and subscribe the coin to the following topics:
+
+```
+- depth
+- trade
+- book ticker
+- realtimes
+```
+
+
+<br>
+
 Example output:
 
 
@@ -87,11 +102,12 @@ Example output:
 ✅ book ticker: ResponseV2 { topic: "bookTicker", params: ResCommonParamsV2 { binary: "false", symbol: "ETHUSDT", symbol_name: "ETHUSDT" }, data: BookTicker { symbol: "ETHUSDT", bid_price: "1196.53", bid_qty: "6.81229", ask_price: "1196.69", ask_qty: "2.02591", time: 1672627312138 } }
 ✅ realtimes: ResponseV2 { topic: "realtimes", params: ResCommonParamsV2 { binary: "false", symbol: "ETHUSDT", symbol_name: "ETHUSDT" }, data: Realtimes { t: 1672627309524, s: "ETHUSDT", c: "1196.69", h: "1204.66", l: "1190.96", o: "1195.91", v: "20134.37723", qv: "24113384.0565187", m: "0.0007" } }
 ✅ pong: Pong { pong: 1672627314329 }
+(...)
 ```
 
 <br>
 
-#### subscribing for topics for a pair
+### subscribing for topics for a pair
 
 Select `pairs`:
 
@@ -104,12 +120,29 @@ Select `pairs`:
 pairs
 ```
 
+
+<br>
+
+This will open a websocket with bybit and subscribe the pairs to the following topics:
+
+```
+- order book l2 25
+- order book l2 200
+- trade
+- instrument info
+- k-line
+- liquidations
+```
+
+
 <br>
 
 Example output:
 
 ```
-
+🐊 subcribing to websockets for: ["ETHUSDT", "BTCUSDT"]
+✅ instrument info snapshot: Response { topic: "instrument_info.100ms.ETHUSDT", res_type: "snapshot", data: InstrumentInfoSnapshot { id: 2, symbol: "ETHUSDT", last_price_e4: "11966500", last_price: "1196.65", bid1_price_e4: "11966000", bid1_price: "1196.60", ask1_price_e4: "11966500", ask1_price: "1196.65", last_tick_direction: "ZeroPlusTick", prev_price_24h_e4: "11939000", prev_price_24h: "1193.90", price_24h_pcnt_e6: "2303", high_price_24h_e4: "12050500", high_price_24h: "1205.05", low_price_24h_e4: "11913500", low_price_24h: "1191.35", prev_price_1h_e4: "11962500", prev_price_1h: "1196.25", price_1h_pcnt_e6: "334", mark_price_e4: "11966100", mark_price: "1196.61", index_price_e4: "11965400", index_price: "1196.54", open_interest_e8: "58516141000000", total_turnover_e8: "4093197159274450000", turnover_24h_e8: "35260448999150020", total_volume_e8: "38356353516000000", volume_24h_e8: "29427055999999", funding_rate_e6: "100", predicted_funding_rate_e6: "100", cross_seq: "24972973797", created_at: "2022-03-31T03:56:16.000Z", updated_at: "2023-01-02T03:14:29.000Z", next_funding_time: "2023-01-02T08:00:00Z", count_down_hour: "5", funding_rate_interval: "8", settle_time_e9: "0", delisting_status: "0" }, cross_seq: "24972976935", timestamp_e6: "1672629272903187" }
+(...)
 ```
 
 

@@ -2,7 +2,7 @@
 
 use std::env;
 use bybit::spot::ws::{PublicV2Response, PublicV2WebSocketApiClient};
-use bybit::inverse::{PublicResponse, PublicWebSocketApiClient};
+use bybit::linear::{PublicResponse, PublicWebSocketApiClient};
 
 
 pub async fn subscribe_coin() {
@@ -45,31 +45,24 @@ pub async fn subscribe_pairs() {
     client.subscribe_order_book_l2_25(&symbols);
     client.subscribe_order_book_l2_200(&symbols);
     client.subscribe_trade(&symbols);
-    client.subscribe_insurance(&symbols);
     client.subscribe_instrument_info(&symbols);
     client.subscribe_kline(&symbols, "1");
     client.subscribe_liquidation(&symbols);
 
     let callback = |res: PublicResponse| match res {
-        PublicResponse::OrderBookL2Snapshot(res) => println!("✅ orderbook L2 snapshot: {:?}", res),
-        PublicResponse::OrderBookL2Delta(res) => println!("✅ orderbook L2 delta: {:?}", res),
+        PublicResponse::OrderBookL2Snapshot(res) => println!("✅ order book L2 snapshot: {:?}", res),
+        PublicResponse::OrderBookL2Delta(res) => println!("✅ order book L2 delta: {:?}", res),
         PublicResponse::Trade(res) => println!("✅ trade: {:?}", res),
-        PublicResponse::Insurance(res) => println!("✅ insurance: {:?}", res),
-        PublicResponse::PerpetualInstrumentInfoSnapshot(res) => {
-            println!("✅ perpetual instrument snapshot: {:?}", res)
+        PublicResponse::InstrumentInfoSnapshot(res) => {
+            println!("✅ instrument info snapshot: {:?}", res)
         }
-        PublicResponse::PerpetualInstrumentInfoDelta(res) => {
-            println!("✅ perpetual instrument delta: {:?}", res)
-        }
-        PublicResponse::FuturesInstrumentInfoSnapshot(res) => {
-            println!("✅ futures instrument snapshot: {:?}", res)
-        }
-        PublicResponse::FuturesInstrumentInfoDelta(res) => {
-            println!("✅ futures instrument delta: {:?}", res)
+        PublicResponse::InstrumentInfoDelta(res) => {
+            println!("✅ instrument info delta: {:?}", res)
         }
         PublicResponse::Kline(res) => println!("✅ kline: {:?}", res),
         PublicResponse::Liquidation(res) => println!("✅ liquidation: {:?}", res),
     };
+
 
     match client.run(callback) {
         Ok(_) => {}
