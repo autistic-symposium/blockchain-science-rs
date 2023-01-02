@@ -43,11 +43,12 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 * using this code, we use websockets an bybit's API to monitor the following:
 
 ```
-    * spot local orderbook, depth, k-lines, trades, and private execution reports
-    * inverse public orderbooks, trades, insurances, perpertuals, futures, k-lines, liquidations
-    * inverse private positions, executions, orders, stop orders
+    * spot pair orderbook, depth, k-lines, and private execution reports
+    * inverse public orderbooks, trades, insurances, perpertuals, futures, liquidations
+    * inverse private positions, executions, stop orders
 ```
 
+* to create a trading bot, you can select: pair, price range, number of grids, and total investment.
 
 <br>
 
@@ -182,10 +183,7 @@ Example output:
 
 ---
 
-#### subscribing to private execution reports
-
-Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
-
+#### subscribing to perpetuals info
 
 Select `3`:
 
@@ -197,23 +195,26 @@ Select `3`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to your private account on the following topics:
+This will open a websocket with bybit and subscribe to perpetual data on the following topics:
 
 ```
-- ticket info sequences
-- outbound account info sequences
+- orderbook l2 25, 200
+- trades
+- insurances
+- instrument info
+- k-lines
+- liquidations
 ```
 
 
 <br>
 
+
 ---
 
 
-#### subscribing to private positions
 
-Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
-
+#### subscribing to spot local order book
 
 Select `4`:
 
@@ -221,33 +222,6 @@ Select `4`:
 🐊 welcome to coingator 🪙. type your option:
 
 ➡ 4: sub to spot local order book topics
-```
-
-<br>
-
-This will open a websocket with bybit and subscribe to your private positions on the following topics:
-
-```
-- positions
-- executions
-- orders
-- stop orders
-- wallets
-```
-
-
-<br>
-
----
-
-#### subscribing to spot local order book
-
-Select `5`:
-
-```
-🐊 welcome to coingator 🪙. type your option:
-
-➡ 5: sub to private execution topics
 ```
 
 <br>
@@ -301,7 +275,40 @@ Example output:
 
 ---
 
-#### subscribing to perpetuals info
+
+
+#### subscribing to private execution reports
+
+Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
+
+
+Select `5`:
+
+```
+🐊 welcome to coingator 🪙. type your option:
+
+➡ 5: sub to private execution topic
+```
+
+<br>
+
+This will open a websocket with bybit and subscribe to your private account on the following topics:
+
+```
+- ticket info sequences
+- outbound account info sequences
+```
+
+
+<br>
+
+---
+
+
+#### subscribing to private positions
+
+Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
+
 
 Select `6`:
 
@@ -313,22 +320,22 @@ Select `6`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to perpetual data on the following topics:
+This will open a websocket with bybit and subscribe to your private positions on the following topics:
 
 ```
-- orderbook l2 25, 200
-- trades
-- insurances
-- instrument info
-- k-lines
-- liquidations
+- positions
+- executions
+- orders
+- stop orders
+- wallets
 ```
 
 
 <br>
 
-
 ---
+
+
 
 ## resources
 
