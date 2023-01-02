@@ -2,7 +2,7 @@
 
 <br>
 
-**This program implements an arb seacher running statistical arbitrage strategies to several exchanges.**
+**This program implements an arb seacher running statistical arbitrage strategies to several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.**
 
 For more details about this project, check my Mirror post, **[bot #2: coingator, a rusty statistical arb searcher]()**.
 
@@ -14,13 +14,13 @@ For more details about this project, check my Mirror post, **[bot #2: coingator,
 ## strategies
 
 > One of the most well-known strategies among different **algorithmic trading methods** is
-the **statistical arbitrage strategy**: a profitable situation stemming from **pricing inefficiencies among financial markets**. Statistical arbitrage is a merely strategy to obtain profit applying **past statistics**.
+the **statistical arbitrage strategy**: a profitable situation stemming from **pricing inefficiencies among financial markets**. Statistical arbitrage is a mere strategy to obtain profit by applying **past statistics**.
 
 <br>
 
 #### cointegration
 
-* [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long run parameters and determining when stationary time series do not depart from equilibrium).
+* [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long-run parameters and determining when stationary time series do not depart from equilibrium).
 * in this packages, we implement this strategy with the following steps:
 
 ```
