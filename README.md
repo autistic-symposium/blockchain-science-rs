@@ -145,7 +145,7 @@ Example output:
 
 ### subscribing to private execution reports
 
-Get your API creds from [bybit](). You could also use their [testnet](https://testnet.bybit.com/).
+Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
 
 Select `exec`:
@@ -163,6 +163,45 @@ This will open a websocket with bybit and subscribe to your private account on t
 ```
 - ticket info sequence
 - outbound account info sequence
+```
+
+
+<br>
+
+Example output:
+
+```
+
+```
+
+<br>
+
+---
+
+
+### subscribing to private positions
+
+Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
+
+
+Select `positions`:
+
+```
+🐊 welcome to coingator 🪙. type your option:
+
+➡ positions: subscribe to private positions topics 
+```
+
+<br>
+
+This will open a websocket with bybit and subscribe to your private positions on the following topics:
+
+```
+- position
+- execution
+- order
+- stop order
+- wallet
 ```
 
 
