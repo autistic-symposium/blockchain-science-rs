@@ -12,10 +12,11 @@
 ### tl; dr
 
 
-#### this program implements a searcher running statistical strategies on several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
+#### 🐊 this program implements a searcher running statistical strategies on several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
 
-#### for more details about this project, check my mirror post: **[bot #2: coingator, the rusty cointegratooor searcher]()**.
+#### 📚 for more details about this project, check my mirror post: **[bot #2: coingator, the rusty cointegratooor searcher]()**.
 
+#### 🚨 disclaimer: this project is a boilerplate to get you started; you might or might not profit from it: in the mev world, nobody is going to handle you the alpha. i am not responsible for anything you do with my free code.
 
 <br>
 
