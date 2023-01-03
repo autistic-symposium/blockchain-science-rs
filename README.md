@@ -24,8 +24,10 @@
 
 ## strategies
 
-> One of the most well-known strategies among different **algorithmic trading methods** is
-the **statistical arbitrage strategy**: a profitable situation stemming from **pricing inefficiencies among financial markets**. Statistical arbitrage is a mere strategy to obtain profit by applying **past statistics**.
+<br>
+
+> *One of the most well-known strategies among different **algorithmic trading methods** is
+the **statistical arbitrage strategy**: a profitable situation stemming from **pricing inefficiencies among financial markets**. Statistical arbitrage is a mere strategy to obtain profit by applying **past statistics**.*
 
 <br>
 
@@ -33,8 +35,9 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 
 * [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long-run parameters and determining when stationary time series do not depart from equilibrium).
 
->  Formally, if **(X,Y,Z)** are each integrated of order **d**, and there exist coefficients **a, b, c** such that **aX + bY + cZ** is integrated of the order less than **d**, then **X**, **Y**, and **Z** are cointegrated.
+>  *Formally, if **(X,Y,Z)** are each integrated of order **d**, and there exist coefficients **a, b, c** such that **aX + bY + cZ** is integrated of the order less than **d**, then **X**, **Y**, and **Z** are cointegrated.*
 
+<br>
 
 * in this tool, we implement this strategy with the following steps:
 
@@ -120,7 +123,7 @@ make run
 
 <br>
 
-> **Crypto derivatives** are financial contracts that derive their values from underlying assets. **Crypto futures** contracts are proxy tools to speculate on the future prices of cryptocurrencies or to be used to hedge against their price changes.
+> ***Crypto derivatives** are financial contracts that derive their values from underlying assets. **Crypto futures** contracts are proxy tools to speculate on the future prices of cryptocurrencies or to be used to hedge against their price changes.*
 
 <br>
 
@@ -208,7 +211,7 @@ Example output:
 <br>
 
 
-> A **perpetual contract** has no expiration date. At Bybit, funding occurs every amount of hours, and they use the interest rate and the premium index to calculate the funding through **Time-Weighted-Average-Price (TWAP)** over the series of minutes rates.
+> *A **perpetual contract** has no expiration date. At Bybit, funding occurs every amount of hours, and they use the interest rate and the premium index to calculate the funding through **Time-Weighted-Average-Price (TWAP)** over the series of minutes rates.*
 
 <br>
 
@@ -245,7 +248,7 @@ This will open a websocket with bybit and subscribe to the following topics:
 
 <br>
 
-> In the **spot market**, one can buy and sell cryptocurrencies for **immediate delivery**. They are directly transferred between market participants (buyers and sellers), which have **direct ownership of the assets** and are entitled to **economic benefits**, such as voting or staking participation.
+> *In the **spot market**, one can buy and sell cryptocurrencies for **immediate delivery**. They are directly transferred between market participants (buyers and sellers), which have **direct ownership of the assets** and are entitled to **economic benefits**, such as voting or staking participation.*
 
 <br>
 
