@@ -1,5 +1,10 @@
 # 🐊🤖 COINGATOR: a statistical rusty searcher 👾✨
 
+<br>
+
+#### (need to commit the rest of this work: i will add everything when i am back from vacation)
+
+
 
 <br>
 
@@ -11,6 +16,7 @@
 
 
 ### tl; dr
+
 
 
 #### 🐊 this program implements a searcher running statistical strategies on several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
