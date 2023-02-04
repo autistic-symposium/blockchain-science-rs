@@ -2,10 +2,6 @@
 
 <br>
 
-#### (need to commit the rest of this work: i will add everything when i am back from vacation)
-
-
-
 <br>
 
 <p align="center">
@@ -19,17 +15,17 @@
 
 
 
-#### 🐊 this program implements a searcher running statistical strategies on several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
+##### 🐊 this program implements a bot running statistical strategies on several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
 
-#### 📚 for more details about this project, check my mirror post: **[bot #3: coingator, a rusty cointegratooor searcher]()**.
+##### 📚 for more details about this project, check my mirror post: **[bot #3: coingator, a rusty cointegratooor searcher]()**.
 
-#### 🚨 disclaimer: this project is a boilerplate to get you started; you might or might not profit from it: in the mev world, nobody is going to handle you the alpha. i am not responsible for anything you do with my free code.
+##### 🚨 disclaimer: i open-source my projects because i believe in the oss ethos. you might or might not profit from it, but this is not my problem. in the mev world, nobody is going to (explicitly) handle you alphas. i am not responsible for anything you do with my free code.
 
 <br>
 
 ---
 
-## strategies
+### cointegration strategy
 
 <br>
 
@@ -38,15 +34,16 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 
 <br>
 
-#### cointegration
 
-* [cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long-run parameters and determining when stationary time series do not depart from equilibrium).
+[cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long-run parameters and determining when stationary time series do not depart from equilibrium).
+
+<br>
 
 >  *Formally, if **(X,Y,Z)** are each integrated of order **d**, and there exist coefficients **a, b, c** such that **aX + bY + cZ** is integrated of the order less than **d**, then **X**, **Y**, and **Z** are cointegrated.*
 
 <br>
 
-* in this tool, we implement this strategy with the following steps:
+in this tool, we implement this strategy with the following steps:
 
 ```
     1. retrieve a list of tradeable symbols
@@ -62,10 +59,7 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 ---
 ## monitoring
 
-
-#### with [bybit](https://www.bybit.com/en-US/)
-
-* using this code, we use websockets and bybit's API to monitor the following:
+we use websockets and [bybit's API](https://www.bybit.com/en-US/) to monitor the following:
 
 ```
     * spot pair orderbook, depth, k-lines, and private execution reports
@@ -73,7 +67,15 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
     * inverse private positions, executions, stop orders
 ```
 
-* to create a trading bot, you can select: pair, price range, number of grids, and total investment.
+<br>
+
+to create a trading bot, you can select: pair, price range, number of grids, and total investment.
+
+<br>
+
+[bybit REST endpoints](https://bybit-exchange.github.io/docs/spot/v1/#t-authentication):
+    - testnet: https://api-testnet.bybit.com 
+    - mainnet: https://api.bybit.com, https://api.bytick.com 
 
 <br>
 
@@ -81,7 +83,7 @@ the **statistical arbitrage strategy**: a profitable situation stemming from **p
 
 ## local set up
 
-Make sure you have [rust](https://www.rust-lang.org/tools/install) installed and add info to a `.env` file:
+make sure you have [rust](https://www.rust-lang.org/tools/install) installed and add info to a `.env` file:
 
 ```
 cp .env.example .env
@@ -89,13 +91,13 @@ vim .env
 ```
 
 
-Then install **COINGATOR** with:
+then install **COINGATOR** with:
 
 ```
 make build
 ```
 
-Run with:
+run with:
 
 ```
 make run
@@ -107,20 +109,19 @@ make run
 
 ---
 
-## running with bybit
+## running 
 
 
 <br>
 
 <img width="410" alt="Screen Shot 2023-01-02 at 12 42 02 PM" src="https://user-images.githubusercontent.com/1130416/210276655-195a8d22-4317-48ea-94ed-cda7c6b32049.png">
 
+<br>
 
 <br>
 
+read on for more dets.
 
-##### [bybit REST endpoints](https://bybit-exchange.github.io/docs/spot/v1/#t-authentication):
-    - Testnet: https://api-testnet.bybit.com 
-    - Mainnet: https://api.bybit.com, https://api.bytick.com 
 
 <br>
 
@@ -134,7 +135,7 @@ make run
 
 <br>
 
-Select `1`:
+select `1`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
@@ -144,7 +145,7 @@ Select `1`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to the following derivative's topics:
+this will open a websocket with bybit and subscribe to the following derivative's topics:
 
 ```
 - depths
@@ -156,7 +157,7 @@ This will open a websocket with bybit and subscribe to the following derivative'
 
 <br>
 
-Example output:
+example output:
 
 
 ```
@@ -175,7 +176,7 @@ Example output:
 
 #### subscribing to topics for a pair of crypto assets
 
-Select `2`:
+select `2`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
@@ -186,7 +187,7 @@ Select `2`:
 
 <br>
 
-This will open a websocket with bybit and subscribe the pair to the following topics:
+this will open a websocket with bybit and subscribe the pair to the following topics:
 
 ```
 - orderbook l2 25, 200
@@ -199,7 +200,7 @@ This will open a websocket with bybit and subscribe the pair to the following to
 
 <br>
 
-Example output:
+example output:
 
 ```
 🐊 subscribing to websockets for: ["ETHUSDT", "BTCUSDT"]
@@ -222,7 +223,7 @@ Example output:
 
 <br>
 
-To subscribe to inverse perpetuals and futures info, select `3`:
+to subscribe to inverse perpetuals and futures info, select `3`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
@@ -259,7 +260,7 @@ This will open a websocket with bybit and subscribe to the following topics:
 
 <br>
 
-Select `4`:
+select `4`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
@@ -269,7 +270,7 @@ Select `4`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to spot info on the following topics:
+this will open a websocket with bybit and subscribe to spot info on the following topics:
 
 ```
 - trades
@@ -279,7 +280,7 @@ This will open a websocket with bybit and subscribe to spot info on the followin
 
 <br>
 
-Example output:
+example output:
 
 
 
@@ -322,10 +323,10 @@ Example output:
 
 #### subscribing to private inverse execution reports
 
-Get your API creds from bybit. You can also use their [testnet](https://testnet.bybit.com/).
+get your API creds from bybit; you can also use their [testnet](https://testnet.bybit.com/).
 
 
-Select `5`:
+select `5`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
@@ -335,7 +336,7 @@ Select `5`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to a private account for the following topics:
+this will open a websocket with bybit and subscribe to a private account for the following topics:
 
 ```
 - ticket info sequences
@@ -350,10 +351,10 @@ This will open a websocket with bybit and subscribe to a private account for the
 
 #### subscribing to private positions
 
-Get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
+get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
 
-Select `6`:
+select `6`:
 
 ```
 🐊 welcome to coingator 🪙. type your option:
@@ -363,7 +364,37 @@ Select `6`:
 
 <br>
 
-This will open a websocket with bybit and subscribe to private positions on the following topics:
+this will open a websocket with bybit and subscribe to private positions on the following topics:
+
+```
+- positions
+- executions
+- orders
+- stop orders
+- wallets
+```
+
+
+<br>
+
+---
+
+#### running you
+
+get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
+
+
+select `6`:
+
+```
+🐊 welcome to coingator 🪙. type your option:
+
+➡ 6: sub to private positions topics
+```
+
+<br>
+
+this will open a websocket with bybit and subscribe to private positions on the following topics:
 
 ```
 - positions
@@ -379,9 +410,12 @@ This will open a websocket with bybit and subscribe to private positions on the 
 ---
 
 
-
-
 ## resources
+
+<br>
+
+* [Cointbot, my cointegration bots in Python, with full visual analysis](https://github.com/go-outside-labs/blockchain-science-py/tree/main/cointegration-bots).
+
 
 <br>
 
