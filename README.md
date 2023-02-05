@@ -324,10 +324,10 @@ example output:
 
 ---
 
-#### 7. tx decoder
+#### 7. calldata decoder
 
 
-select `7` to run a tx decoder:
+select `7` to run a calldata decoder:
 
 
 <br>
@@ -338,3 +338,21 @@ example output:
 
 <br>
 
+---
+
+#### 8. tx decoder
+
+
+select `8` to run a tx decoder:
+
+
+<br>
+
+example output:
+
+
+
+<br>
+
+
+---

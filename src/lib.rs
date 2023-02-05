@@ -28,7 +28,8 @@ pub async fn run() {
     println!("➡ 4: sub to public topics for spot local orderbook");
     println!("➡ 5: sub to the public mempool topic");
     println!("➡ 6: test searcher boilerplate");
-    println!("➡ 7: run tx decoder");
+    println!("➡ 7: run calldata decoder");
+    println!("➡ 8: run tx decoder");
 
     // create an argument input
     let mut input = String::new();
