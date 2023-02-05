@@ -3,10 +3,10 @@
 
 use std::env;
 
-pub mod txs;
 pub mod cexs;
 pub mod dexs;
-pub mod coingecko;
+pub mod txs;
+pub mod market;
 pub mod searchers;
 
 
