@@ -84,6 +84,12 @@ supported CEXs:
 
 <br>
 
+0. directory structure overview
+
+<img width="400" src="https://user-images.githubusercontent.com/1130416/216797278-e1701dd5-d417-4729-904e-20e0ff9661e7.png">
+
+<br>
+
 1. make sure you have [rust](https://www.rust-lang.org/tools/install) installed.
 
 <br>
