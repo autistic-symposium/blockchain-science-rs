@@ -42,7 +42,7 @@
 
 <br>
 
-In this tool, we implement this strategy with the following steps:
+In this package, we implement this strategy with the following steps:
 
 ```
     1. general websocket monitoring
@@ -57,7 +57,11 @@ In this tool, we implement this strategy with the following steps:
 
 
 ---
-## monitoring
+### main features of this package
+
+<br>
+
+#### monitoring
 
 we use websockets and a CEX API of choice (*e.g.*, [bybit's API](https://www.bybit.com/en-US/)) to monitor public topics and info for:
 
@@ -70,8 +74,8 @@ we use websockets and a CEX API of choice (*e.g.*, [bybit's API](https://www.byb
 
 <br>
 
----
-## trading bot
+
+#### trading bot
 
 
 to run a trading bot, you must add the following info to the `.env` file: 
@@ -89,6 +93,8 @@ to run a trading bot, you must add the following info to the `.env` file:
 ---
 
 ## local set up
+
+<br>
 
 1. make sure you have [rust](https://www.rust-lang.org/tools/install) installed.
 2. get your API creds from the exchange you are using (e.g. [bybit]((https://testnet.bybit.com).
@@ -118,7 +124,7 @@ make run
 
 ---
 
-## running 
+## running coingator
 
 
 <br>
@@ -302,7 +308,7 @@ example output:
 
 ---
 
-#### 5. finding cointegration for a given pair 
+#### 5. get cointegration for a given pair 
 
 
 

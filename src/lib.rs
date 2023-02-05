@@ -4,6 +4,7 @@
 use std::env;
 
 pub mod markets;
+pub mod trade;
 use crate::markets::bbit;
 use crate::trade::bot1;
 
@@ -15,8 +16,8 @@ pub async fn run() {
     println!("➡ 2: sub to public topics for a pair of derivatives");
     println!("➡ 3: sub to public inverse perpetual info topics");
     println!("➡ 4: sub to spot local orderbook topics");
-    println!("➡ 5: get cointegration between two symbols");
-    println!("➡ 6: run coingator bot\n");
+    println!("➡ 5: get cointegration for two symbols");
+    println!("➡ 6: deploy coingator bot\n");
 
     // create an argument input
     let mut input = String::new();
