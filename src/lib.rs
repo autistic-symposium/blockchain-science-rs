@@ -3,15 +3,20 @@
 
 use std::env;
 
-pub mod trade;
-pub mod markets;
+pub mod txs;
+pub mod cexs;
+pub mod dexs;
+pub mod searchers;
 
-use crate::markets::bbit;
-use crate::markets::bmex;
-use crate::markets::bnb;
-use crate::trade::bbitbot;
-use crate::trade::bnbbot;
-use crate::trade::bmexbot;
+
+use crate::cexs::bbit;
+use crate::cexs::bmex;
+use crate::cexs::bnb;
+use crate::dexs::mempool;
+use crate::txs::decoder;
+use crate::searchers::searcher_one;
+
+
 
 
 pub async fn run() {
@@ -21,8 +26,9 @@ pub async fn run() {
     println!("➡ 2: sub to public topics for a pair of derivatives");
     println!("➡ 3: sub to public topics for inverse perpetual contracts");
     println!("➡ 4: sub to public topics for spot local orderbook");
-    println!("➡ 5: get cointegration for two symbols");
-    println!("➡ 6: deploy coingator bot\n");
+    println!("➡ 5: sub to the public mempool topic");
+    println!("➡ 6: test searcher boilerplate");
+    println!("➡ 7: run tx decoder");
 
     // create an argument input
     let mut input = String::new();
@@ -38,15 +44,16 @@ pub async fn run() {
 
     // select which cex to use
     let cex = &env::var("CEX").expect("⛔️ CEX must be set on .env file");
-    
+
     if cex == "bybit" {
         match command {
             "1" => bbit::subscribe_coin().await,
             "2" => bbit::subscribe_pairs().await,
             "3" => bbit::subscribe_perpetual().await,
             "4" => bbit::subscribe_spot().await,
-            "5" => bbitbot::find_cointegration().await,
-            "6" => bbitbot::run_bot().await,
+            "5" => mempool::run().await,
+            "6" => searcher_one::run().await,
+            "7" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
     
@@ -56,8 +63,9 @@ pub async fn run() {
             "2" => bnb::subscribe_pairs().await,
             "3" => bnb::subscribe_perpetual().await,
             "4" => bnb::subscribe_spot().await,
-            "5" => bnbbot::find_cointegration().await,
-            "6" => bnbbot::run_bot().await,
+            "5" => mempool::run().await,
+            "6" => searcher_one::run().await,
+            "7" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
     
@@ -66,14 +74,19 @@ pub async fn run() {
             "1" => bmex::subscribe_coin().await,
             "2" => bmex::subscribe_pairs().await,
             "3" => bmex::subscribe_perpetual().await,
-            "4" => bmex::subscribe_spot().await,
-            "5" => bmexbot::find_cointegration().await,
-            "6" => bmexbot::run_bot().await,
+            "5" => mempool::run().await,
+            "6" => searcher_one::run().await,
+            "7" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
 
     } else {
-        println!("⛔️ {} is not a valid CEX", cex);
+        match command {
+            "5" => mempool::run().await,
+            "6" => searcher_one::run().await,
+            "7" => decoder::run().await,
+            _ => println!("command not found: {}", command),
+        }
     }
 
 }
