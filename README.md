@@ -48,11 +48,13 @@ we use websockets and a CEX API of choice to monitor public topics and info for:
     * spot pair orderbooks
 ```
 
-supported CEXs:
+supported data source APIs:
 
-* [bybit](https://www.bybit.com/en-US/) (fully implemented)
-* [bitmex]() (working on progress)
-* [binance]() (working on progress)
+
+* [coingecko]()
+* [bybit](https://www.bybit.com/en-US/) 
+* [bitmex]() 
+* [binance]() 
 
 
 <br>

@@ -6,6 +6,7 @@ use std::env;
 pub mod txs;
 pub mod cexs;
 pub mod dexs;
+pub mod coingecko;
 pub mod searchers;
 
 
@@ -14,6 +15,7 @@ use crate::cexs::bmex;
 use crate::cexs::bnb;
 use crate::dexs::mempool;
 use crate::txs::decoder;
+use crate::market::coingecko;
 use crate::searchers::searcher_one;
 
 
@@ -44,9 +46,9 @@ pub async fn run() {
     let command = args.next().unwrap();
 
     // select which cex to use
-    let cex = &env::var("CEX").expect("⛔️ CEX must be set on .env file");
+    let source = &env::var("SOURCE").expect("⛔️ SOURCE must be set on .env file");
 
-    if cex == "bybit" {
+    if source == "bybit" {
         match command {
             "1" => bbit::subscribe_coin().await,
             "2" => bbit::subscribe_pairs().await,
@@ -57,8 +59,21 @@ pub async fn run() {
             "7" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
-    
-    } else if cex == "binance" {
+
+    } else if source == "coingecko" {
+        match command {
+            "1" => coingecko::subscribe_coin().await,
+            "2" => coingecko::subscribe_pairs().await,
+            "3" => coingecko::subscribe_perpetual().await,
+            "4" => coingecko::subscribe_spot().await,
+            "5" => mempool::run().await,
+            "6" => searcher_one::run().await,
+            "7" => decoder::run().await,
+            _ => println!("command not found: {}", command),
+        }
+        
+
+    } else if source == "binance" {
         match command {
             "1" => bnb::subscribe_coin().await,
             "2" => bnb::subscribe_pairs().await,
@@ -70,7 +85,7 @@ pub async fn run() {
             _ => println!("command not found: {}", command),
         }
     
-    } else if cex == "bitmex" {
+    } else if source == "bitmex" {
         match command {
             "1" => bmex::subscribe_coin().await,
             "2" => bmex::subscribe_pairs().await,
