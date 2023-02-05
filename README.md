@@ -1,4 +1,4 @@
-# 🐊🤖 COINGATOR: a rusty statistical searcher toolkit
+# 🐊🤖 COINGATOR: a rusty statistical searcher boilerplate 
 
 <br>
 
@@ -15,18 +15,19 @@
 
 
 
-##### 🐊 this package implements a toolkit with several utilities for running statistical strategies searchers. It's called coingator because it's a cute name.
+##### 🐊 this package implements a boilerplate with several utilities for running searchers with statistical strategies searchers. It's called coingator because it's a cute name.
 
 
-##### 📚 for more details about this project, check my mirror post **[bot #3: coingator, a rusty statistical searcher toolkit]()**.
+##### 📚 for more details about this project, check my mirror post **[bot #3: coingator, a rusty statistical searcher boilerplate]()**.
 
+##### 🕹 for the coolest web3 package (crate) in rust, check my [web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs)
 ##### 🚨 disclaimer: i open-source my projects because i believe in the oss ethos. you might or might not profit from it, but this is not my problem. in the mev world, nobody is going to (explicitly) handle you alphas. i am not responsible for anything you do with my free code.
 
 <br>
 
 ---
 
-## what's for you?
+## features
 
 <br>
 
