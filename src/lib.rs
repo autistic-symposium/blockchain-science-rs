@@ -19,8 +19,8 @@ pub async fn run() {
     println!("\n🐊 welcome to coingator 🪙. type your option:\n");
     println!("➡ 1: sub to public topics for a derivative");
     println!("➡ 2: sub to public topics for a pair of derivatives");
-    println!("➡ 3: sub to public inverse perpetual info topics");
-    println!("➡ 4: sub to spot local orderbook topics");
+    println!("➡ 3: sub to public topics for inverse perpetual contracts");
+    println!("➡ 4: sub to public topics for spot local orderbook");
     println!("➡ 5: get cointegration for two symbols");
     println!("➡ 6: deploy coingator bot\n");
 

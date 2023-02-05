@@ -101,7 +101,7 @@ to run a trading bot, you must add the following info to the `.env` file:
 
 ---
 
-## local set up
+### local set up
 
 <br>
 
@@ -133,7 +133,7 @@ make run
 
 ---
 
-## running coingator
+### running coingator
 
 
 <br>
@@ -352,12 +352,29 @@ example output:
 
 ---
 
-
-## resources
+### todo list
 
 <br>
 
-* [Cointbot, my cointegration bots in pPython, with full visual analysis of cointegration pairs](https://github.com/go-outside-labs/blockchain-science-py/tree/main/cointegration-bots).
+* benchmark against [coinbot](https://mirror.xyz/steinkirch.eth/KQ0basHaclOCDDtOhz3NgKQhHdHqaqOtU89Sr4QO5L4)
+* add support to other CEXs
+* add support to DEXs
+* add test suite
+* dockerize bots
+
+
+
+
+<br>
+
+---
+
+
+### resources
+
+<br>
+
+* [Cointbot, my cointegration bots in python, with full visual analysis of cointegration pairs](https://github.com/go-outside-labs/blockchain-science-py/tree/main/cointegration-bots).
 
 
 <br>

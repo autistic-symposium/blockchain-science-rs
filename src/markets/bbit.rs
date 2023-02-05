@@ -256,6 +256,7 @@ pub async fn subscribe_perpetual() {
     client.subscribe_liquidation(&symbols);
 
     let callback = |res: OtherOtherPublicResponse| match res {
+        
         OtherOtherPublicResponse::OrderBookL2Snapshot(res) => println!("✅ orderbook L2 snapshot: {:?}", res),
         OtherOtherPublicResponse::OrderBookL2Delta(res) => println!("✅ orderbook L2 Δ: {:?}", res),
         OtherOtherPublicResponse::Trade(res) => println!("✅ trade: {:?}", res),
