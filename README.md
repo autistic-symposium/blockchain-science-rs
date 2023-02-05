@@ -63,7 +63,7 @@ supported CEXs:
 <br>
 
 
-#### tx decoder
+#### tx and calldata decoder
 
 
 
@@ -106,7 +106,9 @@ make run
 
 <br>
 
-<img width="500" alt="Screen Shot 2023-02-04 at 4 51 14 PM" src="https://user-images.githubusercontent.com/1130416/216795862-d2b66312-375b-4117-9b40-89a7557dec34.png">
+
+<img width="500" alt="Screen Shot 2023-02-04 at 5 31 47 PM" src="https://user-images.githubusercontent.com/1130416/216797065-3126d091-ede7-4480-aa9c-b058deaa6cbb.png">
+
 
 
 
