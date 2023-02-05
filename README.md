@@ -11,7 +11,7 @@
 <br>
 
 
-### tl; dr
+## tl; dr
 
 
 
@@ -26,11 +26,18 @@
 
 ---
 
-### utilities available in this toolkit
+## what is in this toolkit?
 
 <br>
 
-#### websocket monitoring for CEXs 
+
+<img width="500" alt="Screen Shot 2023-02-04 at 5 31 47 PM" src="https://user-images.githubusercontent.com/1130416/216797065-3126d091-ede7-4480-aa9c-b058deaa6cbb.png">
+
+<br>
+
+<br>
+
+### websocket monitoring for CEXs 
 
 we use websockets and a CEX API of choice to monitor public topics and info for:
 
@@ -51,19 +58,19 @@ supported CEXs:
 <br>
 
 
-#### websocket monitoring for mempool 
+### websocket monitoring for mempool 
 
 <br>
 
 
-#### searcher boilerplate
+### searcher boilerplate
 
 
 
 <br>
 
 
-#### tx and calldata decoder
+### tx and calldata decoder
 
 
 
@@ -73,7 +80,7 @@ supported CEXs:
 
 ---
 
-### installing this package
+## installing the toolkit
 
 <br>
 
@@ -106,17 +113,9 @@ make run
 
 <br>
 
-
-<img width="500" alt="Screen Shot 2023-02-04 at 5 31 47 PM" src="https://user-images.githubusercontent.com/1130416/216797065-3126d091-ede7-4480-aa9c-b058deaa6cbb.png">
-
-
-
-
-<br>
-
 ---
 
-### options
+## features in details
 
 <br>
 
@@ -356,5 +355,3 @@ example output:
 
 <br>
 
-
----
