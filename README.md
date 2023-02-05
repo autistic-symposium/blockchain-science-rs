@@ -61,9 +61,18 @@ In this package, we implement this strategy with the following steps:
 
 <br>
 
+#### supported CEXs
+
+* [bybit](https://www.bybit.com/en-US/) (full implemented)
+* [bitmex]() (working on progress)
+* [binance]() (working on progress)
+
+
+<br>
+
 #### monitoring
 
-we use websockets and a CEX API of choice (*e.g.*, [bybit's API](https://www.bybit.com/en-US/)) to monitor public topics and info for:
+we use websockets and a CEX API of choice to monitor public topics and info for:
 
 ```
     * crypto derivatives
@@ -97,7 +106,7 @@ to run a trading bot, you must add the following info to the `.env` file:
 <br>
 
 1. make sure you have [rust](https://www.rust-lang.org/tools/install) installed.
-2. get your API creds from the exchange you are using (e.g. [bybit]((https://testnet.bybit.com).
+2. get your API creds from the exchange you are using (e.g. [bybit](https://testnet.bybit.com)).
 3. add info to a `.env` file:
 
 ```
@@ -348,7 +357,7 @@ example output:
 
 <br>
 
-* [Cointbot, my cointegration bots in Python, with full visual analysis of cointegration pairs](https://github.com/go-outside-labs/blockchain-science-py/tree/main/cointegration-bots).
+* [Cointbot, my cointegration bots in pPython, with full visual analysis of cointegration pairs](https://github.com/go-outside-labs/blockchain-science-py/tree/main/cointegration-bots).
 
 
 <br>
