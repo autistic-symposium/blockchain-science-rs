@@ -15,6 +15,7 @@ use crate::cexs::bmex;
 use crate::cexs::bnb;
 use crate::dexs::mempool;
 use crate::txs::decoder;
+use crate::txs::calldata;
 use crate::market::coingecko;
 use crate::searchers::searcher_one;
 
@@ -56,7 +57,8 @@ pub async fn run() {
             "4" => bbit::subscribe_spot().await,
             "5" => mempool::run().await,
             "6" => searcher_one::run().await,
-            "7" => decoder::run().await,
+            "7" => calldata::run().await,
+            "8" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
 
@@ -68,7 +70,8 @@ pub async fn run() {
             "4" => coingecko::subscribe_spot().await,
             "5" => mempool::run().await,
             "6" => searcher_one::run().await,
-            "7" => decoder::run().await,
+            "7" => calldata::run().await,
+            "8" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
         
@@ -81,7 +84,8 @@ pub async fn run() {
             "4" => bnb::subscribe_spot().await,
             "5" => mempool::run().await,
             "6" => searcher_one::run().await,
-            "7" => decoder::run().await,
+            "7" => calldata::run().await,
+            "8" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
     
@@ -92,7 +96,8 @@ pub async fn run() {
             "3" => bmex::subscribe_perpetual().await,
             "5" => mempool::run().await,
             "6" => searcher_one::run().await,
-            "7" => decoder::run().await,
+            "7" => calldata::run().await,
+            "8" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
 
@@ -100,7 +105,8 @@ pub async fn run() {
         match command {
             "5" => mempool::run().await,
             "6" => searcher_one::run().await,
-            "7" => decoder::run().await,
+            "7" => calldata::run().await,
+            "8" => decoder::run().await,
             _ => println!("command not found: {}", command),
         }
     }
