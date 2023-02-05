@@ -29,8 +29,8 @@ pub async fn run() {
     println!("➡ 2: sub to public topics for a pair of derivatives");
     println!("➡ 3: sub to public topics for inverse perpetual contracts");
     println!("➡ 4: sub to public topics for spot local orderbook");
-    println!("➡ 5: sub to the public mempool topic");
-    println!("➡ 6: test searcher boilerplate");
+    println!("➡ 5: sub to public mempool");
+    println!("➡ 6: run searcher boilerplate");
     println!("➡ 7: run calldata decoder");
     println!("➡ 8: run tx decoder");
 

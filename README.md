@@ -26,7 +26,7 @@
 
 ---
 
-## what is in this toolkit?
+## what's for you?
 
 <br>
 
@@ -41,12 +41,12 @@
 
 we use websockets and a CEX API of choice to monitor public topics and info for:
 
-```
-    * crypto derivatives
-    * pairs of crypto derivatives 
-    * inverse perpetual contracts
-    * spot pair orderbooks
-```
+
+* crypto derivatives
+* pairs of crypto derivatives 
+* inverse perpetual contracts
+* spot pair orderbooks
+
 
 supported data source APIs:
 
@@ -301,7 +301,7 @@ example output:
 
 ---
 
-#### 5. monitoring the public mempool
+#### 5) monitoring the public mempool
 
 
 select `5` to start a customized mempool monitoring:
@@ -317,7 +317,7 @@ example output:
 
 ---
 
-#### 6. searcher boilerplate
+#### 6) searcher boilerplate
 
 
 
@@ -334,7 +334,7 @@ example output:
 
 ---
 
-#### 7. calldata decoder
+#### 7) calldata decoder
 
 
 select `7` to run a calldata decoder:
