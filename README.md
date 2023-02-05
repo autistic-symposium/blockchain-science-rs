@@ -1,4 +1,4 @@
-# 🐊🤖 COINGATOR: a rusty statistical searcher 👾✨
+# 🐊🤖 COINGATOR: a rusty statistical searcher toolkit
 
 <br>
 
@@ -15,9 +15,10 @@
 
 
 
-##### 🐊 this program implements a bot running statistical strategies on several exchanges. It's called coingator because it's a cute animal that rhymes with cointegratoooor.
+##### 🐊 this package implements a toolkit with several utilities for running statistical strategies searchers. It's called coingator because it's a cute name.
 
-##### 📚 for more details about this project, check my mirror post: **[bot #3: coingator, a rusty cointegratooor searcher]()**.
+
+##### 📚 for more details about this project, check my mirror post **[bot #3: coingator, a rusty statistical searcher toolkit]()**.
 
 ##### 🚨 disclaimer: i open-source my projects because i believe in the oss ethos. you might or might not profit from it, but this is not my problem. in the mev world, nobody is going to (explicitly) handle you alphas. i am not responsible for anything you do with my free code.
 
@@ -25,52 +26,11 @@
 
 ---
 
-### cointegration strategy
+### utilities available in this toolkit
 
 <br>
 
-> *One of the most well-known strategies among different **algorithmic trading methods** is the **statistical arbitrage strategy**: a profitable situation stemming from **pricing inefficiencies among financial markets** - a mere strategy to obtain profit by applying **past statistics**.*
-
-<br>
-
-
-[Cointegration](https://en.wikipedia.org/wiki/Cointegration) is the **test correlation between two or more non-stationary time series** for a specified period (identifying long-run parameters and determining when stationary time series do not depart from equilibrium).
-
-<br>
-
->  *Formally, if **(X,Y,Z)** are each integrated of order **d**, and there exist coefficients **a, b, c** such that **aX + bY + cZ** is integrated of the order less than **d**, then **X**, **Y**, and **Z** are cointegrated.*
-
-<br>
-
-In this package, we implement this strategy with the following steps:
-
-```
-    1. general websocket monitoring
-    1. retrieving a list of tradeable symbols
-    2. generation of price history
-    3. identification of cointegrated pairs
-    5. backtesting and finding trading signals
-    6. deployment of a custom bot
-```
-
-<br>
-
-
----
-### main features of this package
-
-<br>
-
-#### supported CEXs
-
-* [bybit](https://www.bybit.com/en-US/) (full implemented)
-* [bitmex]() (working on progress)
-* [binance]() (working on progress)
-
-
-<br>
-
-#### monitoring
+#### websocket monitoring for CEXs 
 
 we use websockets and a CEX API of choice to monitor public topics and info for:
 
@@ -81,60 +41,68 @@ we use websockets and a CEX API of choice to monitor public topics and info for:
     * spot pair orderbooks
 ```
 
+supported CEXs:
+
+* [bybit](https://www.bybit.com/en-US/) (fully implemented)
+* [bitmex]() (working on progress)
+* [binance]() (working on progress)
+
+
 <br>
 
 
-#### trading bot
+#### websocket monitoring for mempool 
+
+<br>
 
 
-to run a trading bot, you must add the following info to the `.env` file: 
+#### searcher boilerplate
 
-```
-    * pair symbols
-    * price range
-    * number of grids
-    * total investment
-```
+
+
+<br>
+
+
+#### tx decoder
+
+
+
 
 
 <br>
 
 ---
 
-### local set up
+### installing this package
 
 <br>
 
 1. make sure you have [rust](https://www.rust-lang.org/tools/install) installed.
-2. get your API creds from the exchange you are using (e.g. [bybit](https://testnet.bybit.com)).
-3. add info to a `.env` file:
+
+<br>
+
+2. add any info needed to a `.env` file:
 
 ```
 cp .env.example .env
 vim .env
 ```
 
+<br>
 
-then install **coingator** with:
+3. install **coingator** with:
 
 ```
 make build
 ```
 
-run with:
+<br>
+
+4. run with:
 
 ```
 make run
 ```
-
-
-
-<br>
-
----
-
-### running coingator
-
 
 <br>
 
@@ -144,16 +112,13 @@ make run
 
 <br>
 
-<br>
-
-read on for more dets.
-
-
-<br>
-
 ---
 
-#### 1) subscribing to topics for a crypto derivative asset
+### options
+
+<br>
+
+#### 1) subscribing to a crypto derivative asset
 
 <br>
 
@@ -191,7 +156,7 @@ example output:
 
 ---
 
-#### 2) subscribing to topics for a pair of crypto derivative assets
+#### 2) subscribing to a pair of crypto derivative assets
 
 select `2` to open a websocket and subscribe the pair to the following topics:
 
@@ -221,7 +186,7 @@ example output:
 
 ---
 
-#### 3) subscribing to inverse perpetuals info
+#### 3) subscribing to inverse perpetual contracts
 
 <br>
 
@@ -249,7 +214,14 @@ select `3` to open a websocket and subscribe to the following topics:
 example output:
 
 ```
-
+✅ orderbook L2 snapshot:
+✅ orderbook L2 Δ: 
+✅ trade:
+✅ insurance: 
+✅ perpetual instrument info snapshot:
+✅ perpetual instrument info Δ:
+✅ futures instrument info snapshot:
+✅ futures instrument info Δ:
 ```
 
 
@@ -319,28 +291,10 @@ example output:
 
 ---
 
-#### 5. get cointegration for a given pair 
+#### 5. monitoring the public mempool
 
 
-
-select `5` to find cointegration for a given pair.
-
-
-<br>
-
-example output:
-
-
-<br>
-
-
----
-
-#### 6. deploying customized coingator bot
-
-
-
-select `6` to run a customized bot using this strategy.
+select `5` to start a customized mempool monitoring:
 
 
 <br>
@@ -348,48 +302,39 @@ select `6` to run a customized bot using this strategy.
 example output:
 
 
+<br>
+
+
+---
+
+#### 6. searcher boilerplate
+
+
+
+select `6` to run a customized searcher bot.
+
+
+<br>
+
+example output:
+
+
 
 <br>
 
 ---
 
-### todo list
-
-<br>
-
-* benchmark against [coinbot](https://mirror.xyz/steinkirch.eth/KQ0basHaclOCDDtOhz3NgKQhHdHqaqOtU89Sr4QO5L4)
-* add support to other CEXs
-* add support to DEXs
-* add test suite
-* dockerize bots
+#### 7. tx decoder
 
 
+select `7` to run a tx decoder:
 
 
 <br>
 
----
+example output:
 
-
-### resources
-
-<br>
-
-* [Cointbot, my cointegration bots in python, with full visual analysis of cointegration pairs](https://github.com/go-outside-labs/blockchain-science-py/tree/main/cointegration-bots).
 
 
 <br>
 
-* [Cointegration-Based Pairs Trading Strategy in the Cryptocurrency Market (arxiv:2109.10662)](https://arxiv.org/abs/2109.10662)
-    - *"By considering the main limitations in the market microstructure, our
-strategy exceeds the naive buy-and-hold approach in the Bitmex exchange. Another
-significant finding is that we implement a numerous collection of cryptocurrency coins
-to formulate the model’s spread, which improves the risk-adjusted profitability of the
-pairs trading strategy. Besides, the strategy’s maximum drawdown level is reasonably
-low, which makes it useful to be deployed. The results also indicate that a class of
-coins has better potential arbitrage opportunities than others."*
-
-<br>
-
-* [Constructing Cointegrated Cryptocurrency Portfolios](https://towardsdatascience.com/constructing-cointegrated-cryptocurrency-portfolios-d0a27922891e)
-    - *As the cryptocurrency market continues to grow with new coins and new exchanges, it’s very important for individual investors, crypto-fund managers, as well as regulators to understand the price dependency among all cryptocurrencies, along with their derivatives.*
