@@ -46,11 +46,11 @@ In this tool, we implement this strategy with the following steps:
 
 ```
     1. general websocket monitoring
-    1. retrieving og a list of tradeable symbols
-    2. generatation of price history
+    1. retrieving of a list of tradeable symbols
+    2. generation of price history
     3. identification of cointegrated pairs
-    4. identification of trends
-    5. backtests
+    5. backtesting and finding trading signals
+    6. deployment of a custom bot
 ```
 
 <br>
@@ -304,16 +304,26 @@ example output:
 
 #### 5. finding cointegration for a given pair 
 
-get your API creds from bybit. You could also use their [testnet](https://testnet.bybit.com/).
 
 
 select `5` to find cointegration for a given pair.
 
 
 
-
-
 <br>
+
+
+---
+
+#### 6. deploying customized coingator bot
+
+
+
+select `6` to run a customized bot using this strategy.
+
+
+
+
 <br>
 
 ---

@@ -286,6 +286,10 @@ pub async fn subscribe_perpetual() {
 
 //////////////////////////////// 
 //         PRIVATE API
+//
+//  These methods are not being
+//  used by the main app.
+//
 //////////////////////////////// 
 
 pub async fn subscribe_exec() {
@@ -313,7 +317,6 @@ pub async fn subscribe_exec() {
         Err(e) => println!("{}", e),
     }
 }
-
 
 pub async fn subscribe_positions() {
     

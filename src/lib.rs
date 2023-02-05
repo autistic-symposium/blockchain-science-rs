@@ -5,18 +5,18 @@ use std::env;
 
 pub mod markets;
 use crate::markets::bbit;
+use crate::trade::bot1;
 
 
 pub async fn run() {
     
     println!("\n🐊 welcome to coingator 🪙. type your option:\n");
-    println!("➡ 1: sub to public topics for a derivative (e.g., ETHUSDT)");
+    println!("➡ 1: sub to public topics for a derivative");
     println!("➡ 2: sub to public topics for a pair of derivatives");
     println!("➡ 3: sub to public inverse perpetual info topics");
-    println!("➡ 4: sub to spot local order book topics");
-    println!("➡ 5: sub to private inverse execution topics");
-    println!("➡ 6: sub to private positions topics\n");
-
+    println!("➡ 4: sub to spot local orderbook topics");
+    println!("➡ 5: get cointegration between two symbols");
+    println!("➡ 6: run coingator bot\n");
 
     // create an argument input
     let mut input = String::new();
@@ -39,8 +39,8 @@ pub async fn run() {
             "2" => bbit::subscribe_pairs().await,
             "3" => bbit::subscribe_perpetual().await,
             "4" => bbit::subscribe_spot().await,
-            "5" => bbit::subscribe_exec().await,
-            "6" => bbit::subscribe_positions().await,
+            "5" => bot1::find_cointegration().await,
+            "6" => bot1::run_bot1().await,
             _ => println!("command not found: {}", command),
         }
     
