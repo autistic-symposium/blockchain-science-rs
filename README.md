@@ -1,4 +1,4 @@
-# 🐊🤖 COINGATOR: a rusty statistical searcher boilerplate 
+# 🐊🤖 COINGATOR: a rusty boilerplate for statistical searchers  
 
 <br>
 
@@ -15,7 +15,7 @@
 
 
 
-##### 🐊 this package implements a boilerplate with several utilities for running searchers with statistical strategies searchers. It's called coingator because it's a cute name.
+##### 🐊 this package implements a boilerplate with several utilities for running searchers with statistical strategies. It's called coingator because it's a cute name.
 
 
 ##### 📚 for more details about this project, check my mirror post **[bot #3: coingator, a rusty statistical searcher boilerplate]()**.
