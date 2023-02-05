@@ -1,1 +1,3 @@
-pub mod bot1;
+pub mod bbitbot;
+pub mod bnbbot;
+pub mod bmexbot;

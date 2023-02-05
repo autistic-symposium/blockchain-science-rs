@@ -3,10 +3,15 @@
 
 use std::env;
 
-pub mod markets;
 pub mod trade;
+pub mod markets;
+
 use crate::markets::bbit;
-use crate::trade::bot1;
+use crate::markets::bmex;
+use crate::markets::bnb;
+use crate::trade::bbitbot;
+use crate::trade::bnbbot;
+use crate::trade::bmexbot;
 
 
 pub async fn run() {
@@ -40,16 +45,32 @@ pub async fn run() {
             "2" => bbit::subscribe_pairs().await,
             "3" => bbit::subscribe_perpetual().await,
             "4" => bbit::subscribe_spot().await,
-            "5" => bot1::find_cointegration().await,
-            "6" => bot1::run_bot1().await,
+            "5" => bbitbot::find_cointegration().await,
+            "6" => bbitbot::run_bot().await,
             _ => println!("command not found: {}", command),
         }
     
     } else if cex == "binance" {
-        println!("⛔️ {} is not supported yet", cex);
+        match command {
+            "1" => bnb::subscribe_coin().await,
+            "2" => bnb::subscribe_pairs().await,
+            "3" => bnb::subscribe_perpetual().await,
+            "4" => bnb::subscribe_spot().await,
+            "5" => bnbbot::find_cointegration().await,
+            "6" => bnbbot::run_bot().await,
+            _ => println!("command not found: {}", command),
+        }
     
     } else if cex == "bitmex" {
-        println!("⛔️ {} is not supported yet", cex);
+        match command {
+            "1" => bmex::subscribe_coin().await,
+            "2" => bmex::subscribe_pairs().await,
+            "3" => bmex::subscribe_perpetual().await,
+            "4" => bmex::subscribe_spot().await,
+            "5" => bmexbot::find_cointegration().await,
+            "6" => bmexbot::run_bot().await,
+            _ => println!("command not found: {}", command),
+        }
 
     } else {
         println!("⛔️ {} is not a valid CEX", cex);

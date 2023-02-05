@@ -1,4 +1,4 @@
-// bot1.rs - author: steinkirch
+// bnbbot.rs - author: steinkirch
 
 use std::env;
 use std::io::{self, Write};
@@ -11,7 +11,7 @@ pub async fn find_cointegration() {
 }
 
 
-pub async fn run_bot1() {
+pub async fn run_bot() {
 
     println!("to be implemented");
 

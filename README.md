@@ -1,4 +1,4 @@
-# 🐊🤖 COINGATOR: a statistical rusty searcher 👾✨
+# 🐊🤖 COINGATOR: a rusty statistical searcher 👾✨
 
 <br>
 
@@ -46,7 +46,7 @@ In this package, we implement this strategy with the following steps:
 
 ```
     1. general websocket monitoring
-    1. retrieving of a list of tradeable symbols
+    1. retrieving a list of tradeable symbols
     2. generation of price history
     3. identification of cointegrated pairs
     5. backtesting and finding trading signals
@@ -316,6 +316,10 @@ example output:
 select `5` to find cointegration for a given pair.
 
 
+<br>
+
+example output:
+
 
 <br>
 
@@ -328,6 +332,10 @@ select `5` to find cointegration for a given pair.
 
 select `6` to run a customized bot using this strategy.
 
+
+<br>
+
+example output:
 
 
 
