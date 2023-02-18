@@ -38,7 +38,7 @@
 
 #### 2. [tba] websocket monitoring for mempools
 
-#### 3. [tba] dex-cex arber boilerplate
+#### 3. [tba] dex-cex arber boilerplate (based on [this math](https://github.com/ankitchiplunkar/crypto_charts/blob/master/notebooks/Coinbase%20rewards%20split%20between%20cefi-defi%20arbs%20and%20others.ipynb))
 
 #### 4. [tba] whale watcher analytics
 
