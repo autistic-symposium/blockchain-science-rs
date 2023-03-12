@@ -11,8 +11,11 @@
 
 <br>
 
-## foundry science
+---
 
+## my experiments foundry with foundry
+
+<br>
 
 * **[comparisons of flashloans fees and functions on ethereum](foundry-flashloans):**
   * leverage **foundry** to compare flashloans from **leading lending protocols on ethereum**, including deployment cost and deployment size. 
@@ -26,8 +29,12 @@
 
 <br>
 
+----
 
-## searcher bots
+
+## my searcher bots
+
+<br>
 
 
 * **[kiddor arb searcher](kiddor-searcher-bot):**
