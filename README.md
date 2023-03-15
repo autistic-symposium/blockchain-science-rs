@@ -13,7 +13,7 @@
 
 ---
 
-## my experiments foundry with foundry
+## go-outside-labs experiments with foundry
 
 <br>
 
@@ -32,7 +32,7 @@
 ----
 
 
-## my searcher bots
+## go-outside-labs rusty searcher bots 
 
 <br>
 
