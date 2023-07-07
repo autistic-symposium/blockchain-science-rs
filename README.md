@@ -1,4 +1,4 @@
-# ⛓📊🎸 blockchain science - rust edition
+# ⛓📊🦀 blockchain science - rust edition
 
 
 <br>
@@ -38,8 +38,19 @@
 
 
 * **[kiddor arb searcher](kiddor-searcher-bot):**
-  * this package implements a boilerplate with tools to run a **searcher with statistical arbitrage strategies**. it's inspired by **[ankit & stephane's article](https://frontier.tech/a-new-game-in-town)**. it utilizes libraries from my crate at **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs)**.
+  * this package implements a boilerplate with tools to run a **searcher with statistical arbitrage strategies**. it utilizes libraries from my crate at **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs)**.
 
 <br>
 
+
+----
+
+
+## rust algorithms and optimizations
+
+<br>
+
+
+* **[algorithms and data structure in rust](algorithms-and-data-structures):**
+  * **my solutions and explanations of the main algorithm and data structure problems**, from basic to advanced, and structured as a course.
 
