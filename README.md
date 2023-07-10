@@ -13,7 +13,7 @@
 
 ---
 
-## go-outside-labs experiments with foundry
+## my experiments with foundry
 
 <br>
 
@@ -32,7 +32,7 @@
 ----
 
 
-## go-outside-labs rusty searcher bots 
+## my rusty searcher bots 
 
 <br>
 
@@ -46,11 +46,11 @@
 ----
 
 
-## rust algorithms and optimizations
+## my projects on algorithms and optimizations
 
 <br>
 
 
 * **[algorithms and data structure in rust](algorithms-and-data-structures):**
-  * **my solutions and explanations of the main algorithm and data structure problems**, from basic to advanced, and structured as a course.
+  * **my solutions and explanations for the main classical algorithm and data structure problems**, from basic to advanced, and structured as a course.
 
