@@ -46,11 +46,17 @@
 ----
 
 
-## my projects on algorithms and optimizations
+## go outside labs resources
 
 <br>
 
 
-* **[algorithms and data structure in rust](algorithms-and-data-structures):**
-  * **my solutions and explanations for the main classical algorithm and data structure problems**, from basic to advanced, and structured as a course.
+* **[algorithms and data structure in rust](https://github.com/go-outside-labs/algorithms-and-data-structures-rs):**
+  - master rust the right way: through classical computer science problems.
+
+<br>
+
+* **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs):**
+  - an *on-going* crate for blockchain projects.
+
 
