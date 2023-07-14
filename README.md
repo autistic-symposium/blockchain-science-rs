@@ -4,16 +4,14 @@
 <br>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/1130416/210849647-bad9bc97-2193-4e9e-87c6-f75c8dd21712.jpeg" width="40%" align="center" style="padding:1px;border:1px solid black;"/>
+<img src="https://github.com/go-outside-labs/blockchain-science-rs/assets/138340846/b0c64f91-f46d-4502-9c7f-2aac5dcd73e4" width="50%" align="center" style="padding:1px;border:1px solid black;"/>
  </p>
-
-<br>
 
 <br>
 
 ---
 
-## my experiments with foundry
+## experiments with foundry
 
 <br>
 
