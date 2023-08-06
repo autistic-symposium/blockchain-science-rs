@@ -30,7 +30,7 @@
 ----
 
 
-## my rusty searcher bots 
+## our bots 
 
 <br>
 
@@ -44,7 +44,7 @@
 ----
 
 
-## go outside labs resources
+## other resources
 
 <br>
 
