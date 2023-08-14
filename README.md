@@ -30,7 +30,7 @@
 ----
 
 
-## our bots 
+## bots 
 
 <br>
 
