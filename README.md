@@ -23,7 +23,12 @@
 * **[inspecting evm-based blockchains history](foundry-historical):**
   * leverage **foundry** to analyze blockchain historical data. this type of strategy can be used for several purposes, including **testing vulnerabilities or extracting mev data.**
 
+<br>
 
+* **[my ethernaut solutions and writeups in foundry](https://github.com/go-outside-labs/ethernaut-foundry-writeups-sol)**
+  * wargames for fun or profit. 
+
+<br>
 
 <br>
 
