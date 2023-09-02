@@ -49,7 +49,7 @@
 ----
 
 
-## other resources
+## other of my projects
 
 <br>
 
