@@ -26,7 +26,7 @@
 <br>
 
 * **[my ethernaut solutions and writeups in foundry](https://github.com/go-outside-labs/ethernaut-foundry-writeups-sol)**
-  * wargames for fun or profit. 
+  * solutions for openzeppelin's ethernaut wargames. leveraging foundry, each level has a test set `(.t.sol)`, a script set `(.s.sol)`, and a write-up. some levels also have an exploit at `src/.sol`.
 
 <br>
 
