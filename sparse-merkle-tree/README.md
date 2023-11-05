@@ -16,55 +16,63 @@
 
 <br>
 
+#### authenticated data structures
+
+<br>
+
+an *authenticated data structure* (ADS) is an advanced data structure on which an untrusted prover can query for an entry, receiving a result and a proof so that the response can be efficiently checked for authenticity.
+
+<br>
+
+
+> according to [Miller et al](https://www.cs.umd.edu/~mwh/papers/gpads.pdf), *"an authenticated data structure (ADS) is a data structure whose operations can be carried out by an untrusted prover, the results of which a verifier can efficiently check as authentic. this is done by having the prover produce a compact proof that the verifier can check along with each operation’s result. ADSs thus support outsourcing data maintenance and processing tasks to untrusted servers without loss of integrity."*
+
+<br>
+
+
+
+<p align="center">
+<img src="https://github.com/go-outside-labs/blockchain-science-rs/assets/1130416/3bae8135-a2da-4d59-91c6-587179af1468" width="50%" align="center" style="padding:1px;border:1px solid black;"/>
+</p>
+
+
+<br>
+
+
+authenticated data structures can be thought as cryptographic upgrades of the classic algorithms we are used to (such as hash maps, binary trees, or tries), with an extra operation added to `insert()`, `lookup()`, `delete()`, `update()`: the `commit()`. in other words, ads add two extra features to traditional data structure:
+
+* i. you can calculate a "commitment" of the data structure (a small, unique cryptographic representation of the data structure),
+* ii. queries about the data structure can provide a "proof" of their results, which can be checked against the data structure's digest.
+
+naturally, the properties of an ads rely on standard cryptographic assumptions (e.g., no one can invert or find collisions in a particular cryptographic hash function).
+
+in addition, commitments must uniquely determine the data structure's value, *i.e.*, if `a.commit() == b.commit()`, then `a == b`. but "equal" data structures may not always have equal commitments. depending on what `a == b` means, there may be two data structures `a` and `b` where `a == b` but `a.commit() != b.commit()`. for example, an array can be used to represent a set, but there are many arrays that can represent the same set.
+
+finally, proofs for queries must be complete and sound. completeness means that every valid query result has a valid proof. soundness means that valid proofs imply that the query results are correct (i.e., if `r` is a result for a query `q`, with a proof `pf` and with `check_proof(r,pf,ads.commit())` returning `True`, then `ads.run_query(q) == r`.
+
+<br>
 
 
 #### cryptographic hash functions
 
 
-A *Cryptographic Hash Function* `H` is a special type of function that takes an arbitrarily long sequence of bytes and returns some fixed-size "digest" of that sequence.
+a *cryptographic hash function* `H` is a special function that takes an arbitrarily long sequence of bytes and returns some fixed-size "digest" of that sequence. cryptographic hash functions have two special properties for our purposes:
 
-Cryptographic hash functions have two special properties for our purposes:
-
-- Preimage resistance: given a digest `d`, it's infeasible to calculate a
+- preimage resistance: given a digest `d`, it's infeasible to calculate a
   string `s` such that `H(s) = d`.
-- Collision resistance: it's infeasible to find two strings `s1` and `s2`
+- collision resistance: it's infeasible to find two strings `s1` and `s2`
   such that `H(s1) == H(s2)`.
 
-For this project, we will be using the `SHA-256` hash function, which has a 256-bit digest.
+for this library, we will be using the `SHA-256` hash function, which has a 256-bit digest.
 
 <br>
 
-#### authenticated data structures
-
-<br>
-
-> According to [Miller et al](https://www.cs.umd.edu/~mwh/papers/gpads.pdf), *"An authenticated data structure (ADS) is a data structure whose operations can be carried out by an untrusted prover, the results of which a verifier can efficiently check as authentic. This is done by having the prover produce a compact proof that the verifier can check along with each operation’s result. ADSs thus support outsourcing data maintenance and processing tasks to untrusted servers without loss of integrity."*
-
-<br>
-
-
-An *Authenticated Data Structure* (ADS) is a data structure with 2 extra features:
-
-* (a) You can calculate a "commitment" of the data structure, which is a
-    small, unique cryptographic representation of the data structure.
-* (b) Queries about the data structure can provide a "proof" of their
-    results, which can be checked against the data structure's digest.
-
-Generally, properties of an authenticated data structure rely onstandard cryptographic assumptions, e.g. that no one can invert or find collisions in a particular cryptographic hash function.
-
-Commitments must uniquely determine the data structure's value, *i.e.*, if `a.commit() == b.commit()`, then `a == b`.
-
-"Equal" data structures may not always have equal commitments. Depending on what `a == b` means, there may be two data structures `a` and `b` where `a == b` but `a.commit() != b.commit()`. For example, an array can be used to represent a set, but there are many potential arrays that can represent the same set!
-
-Proofs for queries must be complete and sound. Completeness means that every valid query result has a valid proof. Soundness means that valid proofs imply that the query results are correct. More formally, if you receive a result `r` for a query `q`, and a proof `pf`, and `check_proof(r,pf,ads.commit())` succeeds, then `ads.run_query(q) == r`.
-
-<br>
 
 
 #### authenticated key-value stores
 
 
-An authenticated Key-Value Store is an ADS of an "associative array" or "map". The methods of the data structure are described in `src/kv_trait.rs`:
+an authenticated key-balue store is an ADS of an "associative array" or "map". the methods of the data structure are described in `src/kv_trait.rs`:
 
 ```rust
 fn new() -> Self;
@@ -78,7 +86,7 @@ fn remove(self, key: Self::K) -> Self;
 
 <br>
 
-`insert`, `get`, and `remove` behave like the same methods in `std::collections::HashMap`, except that `insert` and `remove` return copies of the ADS rather than taking `&mut self`.
+note that `insert()`, `get()`, and `remove()` behave like the same methods in `std::collections::HashMap`, except that `insert()` and `remove` return copies of the ADS rather than taking `&mut self`.
 
 <br>
 
@@ -91,9 +99,9 @@ fn remove(self, key: Self::K) -> Self;
 
 
 
-**Merkle trees** are the canonical and original example of an **authenticated data structure**, designed for **easy inclusion proofs** but not **exclusive proofs** (*e.g.*, a prover can efficiently convince the verifier that a particular entry is present but not absent). In addition, since **inserting at a specific position cannot be done efficiently** (as the whole tree would need to be recomputed), these trees are unsuitable for authenticated key-value maps.
+**merkle trees** are the canonical and original example of an **authenticated data structure**, designed for **easy inclusion proofs** but not **exclusive proofs** (*e.g.*, a prover can efficiently convince the verifier that a particular entry is present but not absent). in addition, since **inserting at a specific position cannot be done efficiently** (as the whole tree would need to be recomputed), these trees are unsuitable for authenticated key-value maps.
 
-**Sparse Merkle trees**, on the other hand, provide **efficient exclusion proofs** by design. They can be built on a key-value map, where each possible `(K, V)` entry corresponds to a unique leaf node and is linked to its position in the tree. Due to the **history independence** of the Merkle root from element insertion order, Sparse Merkle trees are the suitable choice to authenticate key-value maps.
+**sparse merkle trees**, on the other hand, provide **efficient exclusion proofs** by design. they can be built on a key-value map, where each possible `(K, V)` entry corresponds to a unique leaf node and is linked to its position in the tree. due to the **history independence** of the merkle root from element insertion order, sparse merkle trees are the suitable choice to authenticate key-value maps.
 
 
 
@@ -105,12 +113,12 @@ fn remove(self, key: Self::K) -> Self;
 <br>
 
 
-In a Sparse Merkle tree, a particular `(K, V)` is represented by the leaf node and its path from the root encoded by its hash digest. 
+in a sparse merkle tree, a particular `(K, V)` is represented by the leaf node and its path from the root encoded by its hash digest. 
 
-Leaf nodes should allow every possible value of the cryptographic hash function to map a `(K, V)` value (through a `H_leaf(K, V)`). Therefore, if the function is represented by `N` bits, the tree's height is `N`, and the paths down to the `2^N` leaf nodes are represented by (`N`-nodes-deep) bit-strings. When the `(K, V)` entry is not present in the map, an empty leaf is assigned (for instance, with an all-`0` digest).
+leaf nodes should allow every possible value of the cryptographic hash function to map a `(K, V)` value (through a `H_leaf(K, V)`). Therefore, if the function is represented by `N` bits, the tree's height is `N`, and the paths down to the `2^N` leaf nodes are represented by (`N`-nodes-deep) bit-strings. When the `(K, V)` entry is not present in the map, an empty leaf is assigned (for instance, with an all-`0` digest).
 
 
-In the case of SHA-256, the tree has a height of `256` and `2^{256}` leaf nodes represented by `256-bit` paths.
+in the case of SHA-256, the tree has a height of `256` and `2^{256}` leaf nodes represented by `256-bit` paths.
 
 
 <br>
@@ -121,12 +129,12 @@ In the case of SHA-256, the tree has a height of `256` and `2^{256}` leaf nodes 
 <br>
 
 
-Branch nodes have left and right subtrees given by the digest of its child subtrees digest (something like `H_branch(Digest, Digest)`, a concatenated hash of its child nodes). Note that different hash functions should be used for leaf and branch nodes to prevent [preimage attacks](https://en.wikipedia.org/wiki/Preimage_attack).
+branch nodes have left and right subtrees given by the digest of its child subtrees digest (something like `H_branch(Digest, Digest)`, a concatenated hash of its child nodes). note that different hash functions should be used for leaf and branch nodes to prevent [preimage attacks](https://en.wikipedia.org/wiki/Preimage_attack).
 
 
-Each child subtree position is found by looking at the bits of `H(K)`. A left branch is denoted as `0` and a right branch as `1`, so the most left leaf's key is `0x000..00`, the next is `0x00..0`, the most right key is `0x11..11`, and so on.
+each child subtree position is found by looking at the bits of `H(K)`. a left branch is denoted as `0` and a right branch as `1`, so the most left leaf's key is `0x000..00`, the next is `0x00..0`, the most right key is `0x11..11`, and so on.
 
-Most leaf nodes are empty, and the hashes of empty nodes are identical. The same is true for interior nodes whose children are all empty: subtrees with no leaf nodes are represented as an empty subtree with a digest such as the all-`0` digest.
+most leaf nodes are empty, and the hashes of empty nodes are identical. the same is true for interior nodes whose children are all empty: subtrees with no leaf nodes are represented as an empty subtree with a digest such as the all-`0` digest.
 
 
 <br>
@@ -138,9 +146,9 @@ Most leaf nodes are empty, and the hashes of empty nodes are identical. The same
 
 <br>
 
-Parent branch nodes are obtained by hashing together two child nodes recursively until the top to the Merkle root of the tree. 
+parent branch nodes are obtained by hashing together two child nodes recursively until the top to the merkle root of the tree. 
 
-The root hash is the commitment of the tree. This value is either digest of the root node (either all-`0` digest or a `H_branch()` function). 
+the root hash is the commitment of the tree. rhis value is either digest of the root node (either all-`0` digest or a `H_branch()` function). 
 
 
 <br>
@@ -162,15 +170,15 @@ The root hash is the commitment of the tree. This value is either digest of the 
 
 <br>
 
-To naively create a Sparse Merkle tree, one can generate all possible `2^N` outputs of the hash function as a leaf in the tree and initialize them to the empty value. This generates a nearly unbounded number of data.
+to naively create a sparse merkle tree, one can generate all possible `2^N` outputs of the hash function as a leaf in the tree and initialize them to the empty value. this generates a nearly unbounded number of data.
 
-Since required storage is only proportional to the number of items inserted into the tree, some optimizations are possible:
+since required storage is only proportional to the number of items inserted into the tree, some optimizations are possible:
 
-  - Items on the leaf node are initially `None` and, therefore, do not need to be stored.
-  - Subtrees with no leaf nodes are represented as "empty subtree", with an all-`0` digest.
-  - Internal nodes all have fixed predictable values that can be re-computed as hashes of `None` values.
+  - items on the leaf node are initially `None` and, therefore, do not need to be stored.
+  - subtrees with no leaf nodes are represented as "empty subtree", with an all-`0` digest.
+  - internal nodes all have fixed predictable values that can be re-computed as hashes of `None` values.
 
-Therefore, a Sparse Merkle Tree can simply store a set of leaf nodes for the `(K, V)` pairs plus a set of empty hashes representing the sparse areas of the tree.
+therefore, a sparse merkle tree can simply store a set of leaf nodes for the `(K, V)` pairs plus a set of empty hashes representing the sparse areas of the tree.
 
 
 
@@ -183,7 +191,7 @@ Therefore, a Sparse Merkle Tree can simply store a set of leaf nodes for the `(K
 
 
 
-A Sparse Merkle is nearly balanced. If there are `N` entries in the tree, a particular entry could be reached in `log2(N)` steps.
+a sparse merkle is nearly balanced. if there are `N` entries in the tree, a particular entry could be reached in `log2(N)` steps.
 
 
 <br>
@@ -192,9 +200,9 @@ A Sparse Merkle is nearly balanced. If there are `N` entries in the tree, a part
 
 <br>
 
-Each leaf is a unique representation of the `2^N` possibilities presented by the digest size `N` of the cryptographic hash function.
+each leaf is a unique representation of the `2^N` possibilities presented by the digest size `N` of the cryptographic hash function.
 
-Since cryptographic hash functions (or, in particular, SHA-256) are expected to be collision resistant (*i.e.,* it's infeasible to find two strings `s1` and `s2` such that `H(s1) == H(s2)`), each key is in a unique leaf.
+since cryptographic hash functions (or, in particular, SHA-256) are expected to be collision resistant (*i.e.,* it's infeasible to find two strings `s1` and `s2` such that `H(s1) == H(s2)`), each key is in a unique leaf.
 
 
 <br>
@@ -204,9 +212,9 @@ Since cryptographic hash functions (or, in particular, SHA-256) are expected to 
 
 <br>
 
-The deterministic/predictable characteristics of one-way hash functions. 
+the deterministic/predictable characteristics of one-way hash functions. 
 
-In other words, `H(0)` is a constant value, and so `H(H(0))`, `H(0, 0)`, `H(H(0, 0))`, etc.
+in other words, `H(0)` is a constant value, and so `H(H(0))`, `H(0, 0)`, `H(H(0, 0))`, etc.
 
 (and big chunks of the tree can be cached).
 
@@ -217,9 +225,9 @@ In other words, `H(0)` is a constant value, and so `H(H(0))`, `H(0, 0)`, `H(H(0,
 
 <br>
 
-Even if the two keys differ by exactly one key, their digest should be completely different. 
+even if the two keys differ by exactly one key, their digest should be completely different. 
 
-If that's not the case, the collision resistance assumption of the cryptographic function is broken (*i.e.,* "it's infeasible to find two strings `s1` and `s2` such that `H(s1) == H(s2)`.")
+if that's not the case, the collision resistance assumption of the cryptographic function is broken (*i.e.,* "it's infeasible to find two strings `s1` and `s2` such that `H(s1) == H(s2)`.")
 
 <br>
 
@@ -242,11 +250,11 @@ If that's not the case, the collision resistance assumption of the cryptographic
 <br>
 
 
-The first authenticated data structure we review, `AuthenticatedKV::SortedKV`, is a sorted key/value store represented by a vectorial abstraction of a (unbalanced) binary tree (*i.e.*, the underlying data structure is an array).
+the first authenticated data structure we review, `AuthenticatedKV::SortedKV`, is a sorted key/value store represented by a vectorial abstraction of a (unbalanced) binary tree (*i.e.*, the underlying data structure is an array).
 
 
 
-Although the key sorts the structure, it's not a binary search tree, and it allows repeated entries. Rather, the structure's commitment is an overall hash calculated recursively as a binary tree. This digest is obtained by mapping the Merkle hash of each pair (named "Merkle mountain range").
+although the key sorts the structure, it's not a binary search tree, and it allows repeated entries. rather, the structure's commitment is an overall hash calculated recursively as a binary tree. ehis digest is obtained by mapping the merkle hash of each pair (named "merkle mountain range").
 
 
 
@@ -303,7 +311,7 @@ impl AuthenticatedKV for SortedKV {
 
 <br>
 
-The `check_proof()` method is an extensive `match(res, proof)` control flow operator that checks against a (complete) set of failure or inconsistency possibilities for:
+the `check_proof()` method is an extensive `match(res, proof)` control flow operator that checks against a (complete) set of failure or inconsistency possibilities for:
 
 1. a query result (`res`),  matching on `Some(value)` or `None`, and 
 2. the associated proof (`pf`) for this result, encoded as two possible states of `enum SortedKVLookup`:
@@ -328,7 +336,7 @@ pub enum SortedKVLookup {
 
 <br>
 
-This structure for the proof contains all the information needed to build the tree up to this point:
+this structure for the proof contains all the information needed to build the tree up to this point:
 
 - if a value is `Present` in result, it provides a pointer to `(k, v)`, the full information about the `prev` and the `next` elements (encoded by `MerkleLookupPath`), and an array with the digest of all siblings. 
 - if a value is `NotPresent` in result, it provides the pointer for the next `ix`, and the full information about the `prev` and the `next` elements (encoded with `MerkleLookupPath`).
@@ -345,7 +353,7 @@ pub struct MerkleLookupPath {
 
 <br>
 
-With `match(res, pf)`, the proof's correctness for the given result is checked by excluding any possibilities of breaking the proof's properties (instead of being around what a specific hash function or cipher is). This is a consistent mathematical approach that allows generalization.
+with `match(res, pf)`, the proof's correctness for the given result is checked by excluding any possibilities of breaking the proof's properties (instead of being around what a specific hash function or cipher is). this is a consistent mathematical approach that allows generalization.
 
 <br>
 
@@ -357,7 +365,7 @@ With `match(res, pf)`, the proof's correctness for the given result is checked b
 
 
 
-Anything that breaks any properties for proof and result properties is returned as `None`. In fact, there are 18 `return None` statements through its entire scope, so that only if all sub-scope checks pass, `Some(())` is the `Optional<()>` return.
+anything that breaks any properties for proof and result properties is returned as `None`. in fact, there are 18 `return None` statements through its entire scope, so that only if all sub-scope checks pass, `Some(())` is the `Optional<()>` return.
 
 
 
@@ -370,13 +378,13 @@ Anything that breaks any properties for proof and result properties is returned 
 
 <br>
 
-The first matching case is for a non-empty query result:
+the first matching case is for a non-empty query result:
 
 <br>
 
 ##### 1. asserting that the digest is equal to the structure's commitment
 
-Checks if the tree's commitment (*i.e.,* `Self::Commitment`, the digest string of the sorted authenticated data structure) can be reproduced with the proof's `path_siblings` array for the given `ix` through `sortedkv_util:::root_from_path()`:
+checks if the tree's commitment (*i.e.,* `Self::Commitment`, the digest string of the sorted authenticated data structure) can be reproduced with the proof's `path_siblings` array for the given `ix` through `sortedkv_util:::root_from_path()`:
 
 <br>
 
@@ -390,9 +398,9 @@ impl MerkleLookupPath {
 
 <br>
 
-This returns the overall digest hash of the tree with `(k, v)` at a leaf pointer `ix`, with all the sibling hashes `path`. The calculation consists of iterating to each sibling in the array of siblings' digests, attributing the hashes for left and right sub-trees, and then iteratively hashing them. 
+this returns the overall digest hash of the tree with `(k, v)` at a leaf pointer `ix`, with all the sibling hashes `path`. the calculation consists of iterating to each sibling in the array of siblings' digests, attributing the hashes for left and right sub-trees, and then iteratively hashing them. 
 
-Although there are multiple representations of an associative array, a general rule for the indexing representation is that:
+although there are multiple representations of an associative array, a general rule for the indexing representation is that:
 - a right sibling can be found through `2 * ix + 2`, so `(ix % 2 == 0) == true`, and 
 - a left sibling can be found through `2 * ix + 1`,  so `(ix % 2 == 1) == true`.
 
@@ -417,21 +425,21 @@ for sib in path.iter() {
 
 ##### 2. checking the relation between `(ix, prev proof)`
 
-For a valid `ix`, the proof of the previous pair must be valid:
-- Its key must not be larger than the current key (or would break the sorted assumption).
-- Its commitment digest must match the ads commitment (or would break the authenticated structure assumption).
-- If `ix == 0`, the element must be the first in the structure, and the previous proof must be `None`.
-- Any proof outside of these assumptions is regarded as invalid.
+for a valid `ix`, the proof of the previous pair must be valid:
+- its key must not be larger than the current key (or would break the sorted assumption).
+- its commitment digest must match the ads commitment (or would break the authenticated structure assumption).
+- if `ix == 0`, the element must be the first in the structure, and the previous proof must be `None`.
+- any proof outside of these assumptions is regarded as invalid.
 
 <br>
 
 ##### 3. checking the next proof, `next`
 
-For a valid `ix`, the proof of the next pair must be valid:
-- If `next == None`, `ix` must be the last element. Without accessing the length of the store, this check is made by ensuring that every right sibling sub-tree is empty.
-- The key for `next` must be larger than the element's key.
-- The calculated commitment digest for the next element must match the ads commitment.
-- Any proof outside of these assumptions is regarded as invalid.
+for a valid `ix`, the proof of the next pair must be valid:
+- if `next == None`, `ix` must be the last element. Without accessing the length of the store, this check is made by ensuring that every right sibling sub-tree is empty.
+- the key for `next` must be larger than the element's key.
+- the calculated commitment digest for the next element must match the ads commitment.
+- any proof outside of these assumptions is regarded as invalid.
 
 
 <br>
@@ -445,21 +453,21 @@ For a valid `ix`, the proof of the next pair must be valid:
 
 <br>
 
-A valid `next_ix` must have a valid previous proof:
-- It can't be `None`, unless `next_ix == 0` (in this case, it must be `None`).
-- Its key must be smaller than the one at `next_ix`.
-- The digest calculated with `root_from_path()` must match the ads commitment. 
-- Any proof outside of these assumptions is regarded as invalid.
+a valid `next_ix` must have a valid previous proof:
+- it can't be `None`, unless `next_ix == 0` (in this case, it must be `None`).
+- its key must be smaller than the one at `next_ix`.
+- the digest calculated with `root_from_path()` must match the ads commitment. 
+- any proof outside of these assumptions is regarded as invalid.
 
 <br>
 
 ##### 2. checking the next proof, `next`
 
-- If next proof is `None`:
-  - If the previous proof is also `None`, the store must be empty, and the commitment must be `empty_kv_hash()`.
-  - Otherwise, the path for the previous proof must be made of all-empty right siblings (by calculating it through `next_ix - 1`).
-- If next proof is a valid, not `None` proof, then its key must be larger than the previous item's key, and the reconstruction of the ads commitment must be correct.
-- Any proof outside of these assumptions is regarded as invalid.
+- if next proof is `None`:
+  - if the previous proof is also `None`, the store must be empty, and the commitment must be `empty_kv_hash()`.
+  - otherwise, the path for the previous proof must be made of all-empty right siblings (by calculating it through `next_ix - 1`).
+- if next proof is a valid, not `None` proof, then its key must be larger than the previous item's key, and the reconstruction of the ads commitment must be correct.
+- any proof outside of these assumptions is regarded as invalid.
 
 
 <br>
@@ -474,14 +482,14 @@ A valid `next_ix` must have a valid previous proof:
 
 <br>
 
-Yes, as the `check_proof()` method matches the query result and the proof against a complete set of invalid possibilities.
+yes, as the `check_proof()` method matches the query result and the proof against a complete set of invalid possibilities.
 
-In addition, every valid or empty query result has a valid proof object built by the method `SortedKV::get()`, which takes a query `k` and returns an `Option<Value>` and a proof:
-- First, by returning an all-empty `(None, NotPresent)` object if the store is empty (which would check valid with `match(next_ix, prev) = (0, None)`).
-- Then, by performing a skewed-to-right binary search, returning a pointer `ix` for the element (if found) or the key position of the rightmost pair with `k <= key` (an index before to where the key should be).
-- With this pointer, the proofs for the element (`ix_proof`) and the previous and next elements (`next`, `prev`) are constructed, and a `LookupProof` object is built and returned by (unsafely?) unwrapping `ix_proof`.
+in addition, every valid or empty query result has a valid proof object built by the method `SortedKV::get()`, which takes a query `k` and returns an `Option<Value>` and a proof:
+- first, by returning an all-empty `(None, NotPresent)` object if the store is empty (which would check valid with `match(next_ix, prev) = (0, None)`).
+- then, by performing a skewed-to-right binary search, returning a pointer `ix` for the element (if found) or the key position of the rightmost pair with `k <= key` (an index before to where the key should be).
+- with this pointer, the proofs for the element (`ix_proof`) and the previous and next elements (`next`, `prev`) are constructed, and a `LookupProof` object is built and returned by (unsafely?) unwrapping `ix_proof`.
 
-Note that, similarly to a simple Merkle tree, this structure is an example of a *vector commitment*, as the root also authenticates the order of the data in the array.
+note that, similarly to a simple merkle tree, this structure is an example of a *vector commitment*, as the root also authenticates the order of the data in the array.
 
 <br>
 
@@ -492,20 +500,20 @@ Note that, similarly to a simple Merkle tree, this structure is an example of a 
 
 <br>
 
-> *Soundness means that valid proofs imply that the query results are correct. 
-If you receive a result `r` for a query `q`, and a proof `pf`, and `check_proof(r, pf, ads.commit())` succeeds, then `ads.run_query(q) == r`.*
+> *soundness means that valid proofs imply that the query results are correct. 
+if you receive a result `r` for a query `q`, and a proof `pf`, and `check_proof(r, pf, ads.commit())` succeeds, then `ads.run_query(q) == r`.*
 
 <br>
 
-Yes, as it relies on `sha2::Digest`, a well-known hash function where collisions are improbable (unless quantum computers). There are `2^{256}` possible `32-byte` hash values when using SHA-256, which makes it nearly impossible for two different documents to coincidentally have the exact same hash value.
+yes, as it relies on `sha2::Digest`, a well-known hash function where collisions are improbable (unless quantum computers). there are `2^{256}` possible `32-byte` hash values when using SHA-256, which makes it nearly impossible for two different documents to coincidentally have the exact same hash value.
 
 <br>
 
-> *Properties of an authenticated data structure rely on standard cryptographic assumptions, e.g. that no one can invert or find collisions in a particular cryptographic hash function.*
+> *properties of an authenticated data structure rely on standard cryptographic assumptions, e.g. that no one can invert or find collisions in a particular cryptographic hash function.*
 
 <br>
 
-In the case of computing `ads.get(key).0 != res` for a `check_proof(key, res, pf, ads.commit()).is_some()`, a proof would be valid for more than one query result. This would mean we would find a collision for SHA-256. Society as a concept would be in trouble.
+in the case of computing `ads.get(key).0 != res` for a `check_proof(key, res, pf, ads.commit()).is_some()`, a proof would be valid for more than one query result. yhis would mean we would find a collision for SHA-256. Society as a concept would be in trouble.
 
 <br>
 
@@ -523,9 +531,9 @@ In the case of computing `ads.get(key).0 != res` for a `check_proof(key, res, pf
 
 <br>
 
-Nix can provide a virtual environment through the `nix-shell` command and the `shell.nix` file.
+nix can provide a virtual environment through the `nix-shell` command and the `shell.nix` file.
 
-Install Nix using [these instructions](https://nixos.org/manual/nix/stable/quick-start) and then run:
+install Nix using [these instructions](https://nixos.org/manual/nix/stable/quick-start) and then run:
 
 
 ```shell
@@ -537,7 +545,7 @@ nix-shell
 
 <br>
 
-Check the setup with:
+check the setup with:
 
 ```shell
 cargo test
@@ -557,7 +565,7 @@ test sorted_kv::tests::utils_check ... ok
 <br>
 
 
-In addition, solutions are formatted under the guidelines in `rustfmt.toml`, by running:
+in addition, solutions are formatted under the guidelines in `rustfmt.toml`, by running:
 
 ```shell
 cargo fmt
@@ -570,11 +578,11 @@ cargo fmt
 
 <br>
 
-Rust differentiates between "unit" tests and "integration" tests, as [described by its documentation](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/second-edition/ch11-03-test-organization.html). 
+rust differentiates between "unit" tests and "integration" tests, as [described by its documentation](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/second-edition/ch11-03-test-organization.html). 
 
-Unit tests are annotated with `#[test] macro`, and integration tests are annotated with`#[cfg(test)] macro`. In addition, [quickcheck]() can be used for property testing using randomly generated inputs.
+unit tests are annotated with `#[test] macro`, and integration tests are annotated with`#[cfg(test)] macro`. in addition, [quickcheck]() can be used for property testing using randomly generated inputs.
 
-In particular, the test `hash_btree_insert_get` was provided as an example of a "simulation test", generating scenarios where two different data structures (`HashMap` and `BTreeMap`) are tested to behave "the same" for `insert()` and `get()` through this check:
+in particular, the test `hash_btree_insert_get` was provided as an example of a "simulation test", generating scenarios where two different data structures (`HashMap` and `BTreeMap`) are tested to behave "the same" for `insert()` and `get()` through this check:
 
 ```rust
 assert_eq!(hmap.get(&k), bmap.get(&k));
@@ -582,7 +590,7 @@ assert_eq!(hmap.get(&k), bmap.get(&k));
 
 <br>
 
-We extended this concept to compare the behavior of our `SortedKV` against `HashMap` through `hash_sortedkv_insert_get()`, making sure we tested for `SortedKV::check_proof()`:
+we extended this concept to compare the behavior of our `SortedKV` against `HashMap` through `hash_sortedkv_insert_get()`, making sure we tested for `SortedKV::check_proof()`:
 
 ```rust
 fn hash_sortedkv_insert_get(ops: Vec<InsertGetOp>) {
@@ -639,7 +647,7 @@ fn hash_sortedkv_insert_get(ops: Vec<InsertGetOp>) {
 
 `SortedKV` should behave similarly to `HashMap` (and `BTreeMap`) for all the canonical data structure operations: `insert()`, `get()` (lookup), `remove()`, and `update()` (not implemented).
 
-We start by including `Remove()` into `InsertGeOp()`,
+we start by including `Remove()` into `InsertGeOp()`,
 
 ```rust
 enum InsertGetRemoveOp {
@@ -690,7 +698,7 @@ Remove("".to_string()),
 
 <br>
 
-But let's see if we can learn anything with fuzzing
+but let's see if we can learn anything with fuzzing:
 
 
 <br>
@@ -756,7 +764,7 @@ fn find_the_bug_approach_1_fake_bug() {
 
 
 
-Note that the test above still passes if:
+note that the test above still passes if:
 
  - `v1 == v2`, or
  - `k == ""`, or, more generally,
@@ -768,7 +776,7 @@ Note that the test above still passes if:
 
 <br>
 
-While fuzzing, the test failed non-deterministically (*i.e.*, it was passing, and then it failed without anything being changed in the code). For instance, we can look at the `Arguments` section of the output (the minimal input that fails) and add it to `_test_cases` as an extra regression test:
+while fuzzing, the test failed non-deterministically (*i.e.*, it was passing, and then it failed without anything being changed in the code). for instance, we can look at the `Arguments` section of the output (the minimal input that fails) and add it to `_test_cases` as an extra regression test:
 
 <br>
 
@@ -785,7 +793,7 @@ hash_sortedkv_insert_get(vec![
 <br>
 
 
-Failures would be due to the fact that `HashMap` does not support duplicate keys (but `SortedKV` does), so it's not a surprising finding. 
+failures would be due to the fact that `HashMap` does not support duplicate keys (but `SortedKV` does), so it's not a surprising finding. 
 
 <br>
 
