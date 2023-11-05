@@ -19,7 +19,7 @@
 
 <br>
 
-* **[a sparse merkle tree library from scratch:](sparse-merkle-trees)**
+* **[a sparse merkle tree library from scratch:](sparse-merkle-tree)**
   * a beautiful theoretical walkthrough and library on **authenticated data structures** and **sparse merkle trees**, including full unit and fuzzing test cases.
 
 <br>
