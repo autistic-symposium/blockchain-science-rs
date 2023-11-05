@@ -9,6 +9,33 @@
 
 <br>
 
+
+---
+
+
+## my projects and libraries
+
+
+
+<br>
+
+* **[a sparse merkle tree library from scratch:](sparse-merkle-trees)**
+  * a beautiful theoretical walkthrough and library on **authenticated data structures** and **sparse merkle trees**, including full unit and fuzzing test cases.
+
+<br>
+
+* **[kiddor arb searcher](kiddor-searcher-bot):**
+  * this package implements a boilerplate with tools to run a **searcher with statistical arbitrage strategies**. it utilizes libraries from my crate at **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs)**.
+  * (i never finished this bot, but maybe i will someday).
+
+<br>
+
+* **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs):**
+  - an *on-going* crate for blockchain projects.
+
+
+<br>
+
 ---
 
 ## experiments with foundry
@@ -28,25 +55,7 @@
 * **[my ethernaut solutions and writeups in foundry](https://github.com/go-outside-labs/ethernaut-foundry-writeups-sol)**
   * solutions for openzeppelin's ethernaut wargames. leveraging foundry, each level has a test set `(.t.sol)`, a script set `(.s.sol)`, and a write-up. some levels also have an exploit at `src/.sol`.
 
-<br>
 
-<br>
-
-----
-
-
-## other of my projects
 
 <br>
-
-
-* **[kiddor arb searcher](kiddor-searcher-bot):**
-  * this package implements a boilerplate with tools to run a **searcher with statistical arbitrage strategies**. it utilizes libraries from my crate at **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs)**.
-  * (i never finished this bot, but maybe i will someday).
-
-<br>
-
-* **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs):**
-  - an *on-going* crate for blockchain projects.
-
 
