@@ -24,14 +24,17 @@
 
 <br>
 
-* **[kiddor arb searcher](kiddor-searcher-bot):**
-  * this package implements a boilerplate with tools to run a **searcher with statistical arbitrage strategies**. it utilizes libraries from my crate at **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs)**.
-  * (i never finished this bot, but maybe i will someday).
-
-<br>
 
 * **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs):**
   - an *on-going* crate for blockchain projects.
+
+<br>
+
+
+* **[kiddor arb searcher](kiddor-searcher-bot):**
+  * this (unfinished) package implements a boilerplate with tools to run a **searcher with statistical arbitrage strategies**. it utilizes libraries from my crate at **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs)**.
+
+
 
 
 <br>
