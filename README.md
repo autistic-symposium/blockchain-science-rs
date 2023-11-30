@@ -26,7 +26,7 @@
 
 
 * **[web3-toolkit-rs](https://github.com/go-outside-labs/web3-toolkit-rs):**
-  - an *on-going* crate for blockchain projects.
+  - an *on-going* (?) crate for blockchain projects.
 
 <br>
 
