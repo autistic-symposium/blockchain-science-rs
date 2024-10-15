@@ -1,5 +1,5 @@
 // src/utils/commands.rs
-// author: steinkirch
+// author: Mia Stein
 
 use clap::{Args, Parser, Subcommand};
 

@@ -1,5 +1,5 @@
 // maths
-// author: steinkirch
+// author: Mia Stein
 
 use hex;
 use ring::hmac;

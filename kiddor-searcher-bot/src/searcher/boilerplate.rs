@@ -1,5 +1,5 @@
 // boilerplate.rs
-// author: steinkirch
+// author: Mia Stein
 
 use std::env;
 

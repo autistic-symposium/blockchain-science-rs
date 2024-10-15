@@ -1,5 +1,5 @@
 // coingecko.rs
-// author: steinkirch
+// author: Mia Stein
 
 use std::env;
 use std::io::{self, Write};

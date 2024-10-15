@@ -8,6 +8,9 @@
 <br>
 
 #### 🛠 we leverage [foundry](https://github.com/foundry-rs/foundry) to compare flashloans from **lending protocols on ethereum**, including deployment cost, and deployment size. 
+#### 🛠 this experiment is adapted from **[@jeiwan's code](https://github.com/Jeiwan/flash-loans-comparison)**.
+
+<br>
 
 #### 💾 here is how the foundry test file looks:
 

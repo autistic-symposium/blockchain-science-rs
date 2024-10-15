@@ -1,5 +1,5 @@
 // main.rs
-// author: steinkirch
+// author: Mia Stein
 
 mod utils;
 mod cexs;

@@ -32,8 +32,9 @@ an *authenticated data structure* (ADS) is an advanced data structure on which a
 
 
 <p align="center">
-<img src="https://github.com/go-outside-labs/blockchain-science-rs/assets/1130416/3bae8135-a2da-4d59-91c6-587179af1468" width="50%" align="center" style="padding:1px;border:1px solid black;"/>
+<img src="https://github.com/go-outside-labs/blockchain-science-rs/assets/138340846/e24862d2-f9be-47fc-ab4b-a1e6c734247d" width="50%" align="center" style="padding:1px;border:1px solid black;"/>
 </p>
+
 
 
 <br>
