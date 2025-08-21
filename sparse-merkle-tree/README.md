@@ -11,6 +11,7 @@
 <br>
 
 
+---
 
 ### ✨ theoretical background
 
@@ -20,7 +21,7 @@
 
 <br>
 
-an *authenticated data structure* (ADS) is an advanced data structure on which an untrusted prover can query for an entry, receiving a result and a proof so that the response can be efficiently checked for authenticity.
+an *authenticated data structure* (ADS) is an advanced data structure in which an untrusted prover can query for an entry, receiving a result and a proof so that the response can be efficiently checked for authenticity.
 
 <br>
 
@@ -40,7 +41,7 @@ an *authenticated data structure* (ADS) is an advanced data structure on which a
 <br>
 
 
-authenticated data structures can be thought as cryptographic upgrades of the classic algorithms we are used to (such as hash maps, binary trees, or tries), with an extra operation added to `insert()`, `lookup()`, `delete()`, `update()`: the `commit()`. in other words, ads add two extra features to traditional data structure:
+authenticated data structures can be thought of as cryptographic upgrades of the classic algorithms we are used to (such as hash maps, binary trees, or tries), with an extra operation added to `insert()`, `lookup()`, `delete()`, `update()`: the `commit()`. in other words, ads add two extra features to traditional data structures:
 
 * i. you can calculate a "commitment" of the data structure (a small, unique cryptographic representation of the data structure),
 * ii. queries about the data structure can provide a "proof" of their results, which can be checked against the data structure's digest.
@@ -53,13 +54,14 @@ finally, proofs for queries must be complete and sound. completeness means that 
 
 <br>
 
+---
 
 #### cryptographic hash functions
 
 
 a *cryptographic hash function* `H` is a special function that takes an arbitrarily long sequence of bytes and returns some fixed-size "digest" of that sequence. cryptographic hash functions have two special properties for our purposes:
 
-- preimage resistance: given a digest `d`, it's infeasible to calculate a
+- pre-image resistance: given a digest `d`, it's infeasible to calculate a
   string `s` such that `H(s) = d`.
 - collision resistance: it's infeasible to find two strings `s1` and `s2`
   such that `H(s1) == H(s2)`.
@@ -68,12 +70,12 @@ for this library, we will be using the `SHA-256` hash function, which has a 256-
 
 <br>
 
-
+---
 
 #### authenticated key-value stores
 
 
-an authenticated key-balue store is an ADS of an "associative array" or "map". the methods of the data structure are described in `src/kv_trait.rs`:
+an authenticated key-value store is an ADS of an "associative array" or "map". the methods of the data structure are described in `src/kv_trait.rs`:
 
 ```rust
 fn new() -> Self;
@@ -92,8 +94,9 @@ note that `insert()`, `get()`, and `remove()` behave like the same methods in `s
 <br>
 
 
+---
 
-#### understading sparse merkle trees
+#### understanding sparse merkle trees
 
 <br>
 
@@ -135,12 +138,10 @@ branch nodes have left and right subtrees given by the digest of its child subtr
 
 each child subtree position is found by looking at the bits of `H(K)`. a left branch is denoted as `0` and a right branch as `1`, so the most left leaf's key is `0x000..00`, the next is `0x00..0`, the most right key is `0x11..11`, and so on.
 
-most leaf nodes are empty, and the hashes of empty nodes are identical. the same is true for interior nodes whose children are all empty: subtrees with no leaf nodes are represented as an empty subtree with a digest such as the all-`0` digest.
+most leaf nodes are empty, and the hashes of empty nodes are identical. the same is true for interior nodes, whose children are all empty: subtrees with no leaf nodes are represented as an empty subtree with a digest such as the all-`0` digest.
 
 
 <br>
-
-
 
 
 ##### the root node
@@ -149,7 +150,7 @@ most leaf nodes are empty, and the hashes of empty nodes are identical. the same
 
 parent branch nodes are obtained by hashing together two child nodes recursively until the top to the merkle root of the tree. 
 
-the root hash is the commitment of the tree. rhis value is either digest of the root node (either all-`0` digest or a `H_branch()` function). 
+the root hash is the commitment of the tree. this value is either digest of the root node (either all-`0` digest or a `H_branch()` function). 
 
 
 <br>
@@ -161,8 +162,6 @@ the root hash is the commitment of the tree. rhis value is either digest of the 
 
 
 <br>
-
-
 
 
 ##### space complexity
@@ -189,7 +188,6 @@ therefore, a sparse merkle tree can simply store a set of leaf nodes for the `(K
 
 
 <br>
-
 
 
 a sparse merkle is nearly balanced. if there are `N` entries in the tree, a particular entry could be reached in `log2(N)` steps.
@@ -304,7 +302,7 @@ impl AuthenticatedKV for SortedKV {
 <br>
 
 
-
+---
 
 #### on `SortedKV::check_proof` 
 
@@ -374,6 +372,7 @@ anything that breaks any properties for proof and result properties is returned 
 <br>
 
 
+---
 
 #### matching on `(res, pf) = (Some(value), Present)`
 
@@ -446,6 +445,8 @@ for a valid `ix`, the proof of the next pair must be valid:
 <br>
 
 
+---
+
 #### matching on `(res, pf) = (None, NotPresent)`
 
 <br>
@@ -474,6 +475,7 @@ a valid `next_ix` must have a valid previous proof:
 <br>
 
 
+---
 
 #### is `check_proof()` complete?
 
@@ -495,7 +497,7 @@ note that, similarly to a simple merkle tree, this structure is an example of a 
 <br>
 
 
-
+---
 
 #### is `check_proof()` sound?
 
@@ -538,9 +540,11 @@ install Nix using [these instructions](https://nixos.org/manual/nix/stable/quick
 
 
 ```shell
-nix-shell
+make nix
 ```
 <br>
+
+---
 
 #### running tests
 
@@ -549,7 +553,7 @@ nix-shell
 check the setup with:
 
 ```shell
-cargo test
+make test
 
 running 9 tests
 test sorted_kv::tests::hash_btree_insert_get_test_cases ... ok
@@ -569,7 +573,7 @@ test sorted_kv::tests::utils_check ... ok
 in addition, solutions are formatted under the guidelines in `rustfmt.toml`, by running:
 
 ```shell
-cargo fmt
+make fmt
 ```
 <br>
 
@@ -797,8 +801,4 @@ hash_sortedkv_insert_get(vec![
 failures would be due to the fact that `HashMap` does not support duplicate keys (but `SortedKV` does), so it's not a surprising finding. 
 
 <br>
-
-
-
-
 
